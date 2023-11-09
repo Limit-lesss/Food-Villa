@@ -70,16 +70,16 @@ function AppLayout() {
 }
 export const appRouter = createBrowserRouter([
   {
-    path: "/",
+    path: "/Food-Villa",
     element: <AppLayout />,
     errorElement: <Error />,
     children: [
       {
-        path: "/",
+        path: "/Food-Villa",
         element: <Body />,
       },
       {
-        path: "/about",
+        path: "/Food-Villa/about",
         element: <About />,
         children: [
           {
@@ -89,19 +89,19 @@ export const appRouter = createBrowserRouter([
         ],
       },
       {
-        path: "/contact",
+        path: "/Food-Villa/contact",
         element: <Contact />,
       },
       {
-        path: "/restaurant/:id",
+        path: "/Food-Villa/restaurant/:id",
         element: <RestaurantMenu />,
       },
       {
-        path: "/login",
+        path: "/Food-Villa/login",
         element: <SignInPage />,
       },
       {
-        path: "/instamart",
+        path: "/Food-Villa/instamart",
         element: (
           <Suspense fallback={<Shimmer />}>
             <Instamart />
@@ -109,7 +109,7 @@ export const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: "/cart",
+        path: "/Food-Villa/cart",
         element: <Cart />,
       },
     ],
