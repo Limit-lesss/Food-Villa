@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.41a112d3.css",
+    "main.js": "/static/js/main.f63f133a.js",
+    "static/js/842.803e4746.chunk.js": "/static/js/842.803e4746.chunk.js",
+    "static/js/787.9d96f578.chunk.js": "/static/js/787.9d96f578.chunk.js",
+    "static/media/no-internet.jpg": "/static/media/no-internet.e8e89d003ad460452995.jpg",
+    "static/media/emptyCart.png": "/static/media/emptyCart.27635c780c7589568114.png",
+    "static/media/login-img.png": "/static/media/login-img.1d3e3bed142be60b8588.png",
+    "static/media/404.png": "/static/media/404.ccbc392a3947a285cb7e.png",
+    "static/media/light-foodvilla-logo.png": "/static/media/light-foodvilla-logo.5b7946ae796d63ea8a76.png",
+    "static/media/dark-foodvilla-logo.png": "/static/media/dark-foodvilla-logo.23eb60d7acb8a69b7114.png",
+    "static/media/non-veg.png": "/static/media/non-veg.59017ffdbf8170778224.png",
+    "static/media/veg.png": "/static/media/veg.ae408ce37a4db6433229.png",
+    "index.html": "/index.html",
+    "main.41a112d3.css.map": "/static/css/main.41a112d3.css.map",
+    "main.f63f133a.js.map": "/static/js/main.f63f133a.js.map",
+    "842.803e4746.chunk.js.map": "/static/js/842.803e4746.chunk.js.map",
+    "787.9d96f578.chunk.js.map": "/static/js/787.9d96f578.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.41a112d3.css",
+    "static/js/main.f63f133a.js"
+  ]
+}
