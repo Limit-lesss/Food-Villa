@@ -16,7 +16,7 @@ import { toggleCart } from "../utils/cartSlice";
 const Title = () => {
   const { darkMode } = useTheme();
   return (
-    <Link to={"/"}>
+    <Link to={"/Food-Villa/"}>
       <div className="flex items-center">
         <img
           src={darkMode ? DarkLogo : LightLogo}
@@ -48,22 +48,22 @@ const Header = () => {
       <Title />
       <div className=" w-1/2">
         <ul className="flex w-full justify-around  text-slate-600 dark:text-slate-300">
-          <Link to="/">
+          <Link to="/Food-Villa/">
             <li className=" w-32 text-center py-1.5 rounded-full text-lg font-medium relative after:absolute after:w-0 after:h-0.5 after:bg-pink-900 after:dark:bg-slate-400 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-500 shadow-lg overflow-hidden dark:bg-slate-800 ">
               Home
             </li>
           </Link>
-          <Link to="/about">
+          <Link to="/Food-Villa/about">
             <li className=" w-32 text-center py-1.5 rounded-full text-lg font-medium relative after:absolute after:w-0 after:h-0.5 after:bg-pink-900 after:dark:bg-slate-400 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-500 shadow-lg overflow-hidden dark:bg-slate-800 ">
               About Us
             </li>
           </Link>
-          <Link to="/contact">
+          <Link to="/Food-Villa/contact">
             <li className=" w-32 text-center py-1.5 rounded-full text-lg font-medium relative after:absolute after:w-0 after:h-0.5 after:bg-pink-900 after:dark:bg-slate-400 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-500 shadow-lg overflow-hidden dark:bg-slate-800 ">
               Contact
             </li>
           </Link>
-          <Link to="/instamart">
+          <Link to="/Food-Villa/instamart">
             <li className="w-32 text-center py-1.5 rounded-full text-lg font-medium relative after:absolute after:w-0 after:h-0.5 after:bg-pink-900 after:dark:bg-slate-400 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-500 shadow-lg overflow-hidden dark:bg-slate-800 ">
               Instamart
             </li>
@@ -156,7 +156,7 @@ const Header = () => {
                 <p className="text-slate-400 text-sm">
                   Extra charges may apply
                 </p>
-                <Link to={"/cart"} onClick={e => handleShowCart()}>
+                <Link to={"/Food-Villa/cart"} onClick={e => handleShowCart()}>
                   <p className="w-full bg-orange-500 py-3 text-center rounded mt-4 font-bold text-white hover:shadow-lg hover:shadow-slate-400">
                     CHECKOUT
                   </p>
@@ -164,7 +164,7 @@ const Header = () => {
               </div>
             )}
           </div>
-          <Link to={"/cart"} onClick={e => handleShowCart()}>
+          <Link to={"/Food-Villa/cart"} onClick={e => handleShowCart()}>
             <div className="flex items-center">
               {
                 <img
@@ -192,7 +192,7 @@ const Header = () => {
             Logout
           </button>
         ) : (
-          <Link to={"/login"}>
+          <Link to={"/Food-Villa/login"}>
             <button
               onClick={() => setIsLoggedIn(!isLoggedIn)}
               className="rounded-full text-slate-600 dark:text-slate-900 p-2 w-28 text-lg bg-pink-200 dark:bg-slate-400 font-semibold shadow-lg hover:dark:shadow-slate-500 hover:dark:shadow-lg">

@@ -141,7 +141,7 @@ const Cart = () => {
         <p className="text-lg text-slate-400">
           You can go to home page to view more restaurants
         </p>
-        <Link to="/">
+        <Link to="/Food-Villa/">
           <button className="bg-red-200 dark:bg-slate-200 py-3 px-5 my-3 rounded-full shadow-lg font-bold text-slate-700">
             Homepage
           </button>

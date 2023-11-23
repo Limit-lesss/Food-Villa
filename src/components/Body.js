@@ -78,7 +78,7 @@ const Body = () => {
 
       <div className="grid grid-cols-4 gap-4 py-5 min-h-screen">
         {filterData(restaurant, text)?.map((e) => (
-          <Link to={"/restaurant/" + e?.info?.id} key={e?.info?.id}>
+          <Link to={"/Food-Villa/restaurant/" + e?.info?.id} key={e?.info?.id}>
             <RestaurantCard {...e?.info} />
           </Link>
         ))}

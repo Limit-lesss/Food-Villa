@@ -70,7 +70,7 @@ const Carousel = ({ carousel }) => {
       </div>
       <div className="flex mt-3 overflow-hidden w-full" ref={elementRef}>
         {carousel?.map((e) => (
-          <Link  to={"/restaurant/" + e?.entityId} key={e?.id}>
+          <Link  to={"/Food-Villa/restaurant/" + e?.entityId} key={e?.id}>
             <div className="w-96 mr-5">
               <img src={IMG_CDN_URL + e?.imageId} className=" w-96 h-60" />
             </div>
