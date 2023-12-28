@@ -27,6 +27,9 @@ import { CartProvider } from "./context/CartContext";
 import Cart from "./components/Cart";
 import { Provider, useDispatch } from "react-redux";
 import store from "./utils/store";
+import SearchPage from "./components/SearchPage";
+import RestaurantCollection from "./components/RestaurantCollection";
+import FoodItemResCol from "./components/FoodItemResCol";
 
 // let uuid = self.crypto.randomUUID();
 // console.log(uuid);
@@ -55,7 +58,7 @@ function AppLayout() {
 
       <Provider store={store}>
         <ScrollRestoration
-          getKey={(location, matches) => {
+          getKey={(location) => {
             return location.pathname;
           }}
         />
@@ -79,14 +82,8 @@ export const appRouter = createBrowserRouter([
         element: <Body />,
       },
       {
-        path: "/Food-Villa/about",
-        element: <About />,
-        children: [
-          {
-            path: "profile",
-            element: <Profile />,
-          },
-        ],
+        path: "/Food-Villa/SearchPage",
+        element: <SearchPage />,
       },
       {
         path: "/Food-Villa/contact",
@@ -111,6 +108,14 @@ export const appRouter = createBrowserRouter([
       {
         path: "/Food-Villa/cart",
         element: <Cart />,
+      },
+      {
+        path: "/Food-Villa/restaurantCollection/:entityId",
+        element: <RestaurantCollection />,
+      },
+      {
+        path: "/Food-Villa/foodItemRestaurantCollection/:entityId",
+        element: <FoodItemResCol />,
       },
     ],
   },

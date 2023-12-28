@@ -52,10 +52,9 @@ const Menu = ({
   const handleRemoveItem = (id) => {
     dispatch(removeItem(id));
   };
-
   const resDet = useSelector((store) => store.cart.resDetail);
   const handleResInfo = (resInfo) => {
-    if (resDet[0]?.id != resInfo?.id) {
+    if (resDet[0]?.id !== resInfo?.id) {
       dispatch(clearCart());
       handleAddItem(foodInfo);
     }
@@ -65,11 +64,11 @@ const Menu = ({
   return (
     show && (
       <div
-        className="flex my-4 px-4 border-blue-100 dark:border-slate-600 border-t 
+        className="flex my-4 px-4 border-rose-300 bg-rose-50 dark:bg-slate-700 dark:border-slate-400  border-t 
       py-4 items-center relative">
         <div className="w-3/4">
           <div className="flex items-center">
-            {itemAttribute?.vegClassifier == "VEG" ? (
+            {itemAttribute?.vegClassifier === "VEG" ? (
               <img src={Veg} alt="" className="w-6 h-6 my-1" />
             ) : (
               <img src={NonVeg} alt="" className="w-5 h-5 my-1" />
@@ -86,7 +85,7 @@ const Menu = ({
           <p className="my-0 text-red-900 dark:text-slate-200 font-bold">
             ₹{(price || defaultPrice) / 100}
           </p>
-          <p className="my-1 text-gray-400"> {description}</p>
+          <p className="my-1 text-slate-500"> {description}</p>
         </div>
         {/* {showAlert && (
           <div className="fixed w-1/2 transition-all duration-300 h-56 bottom-2 left-80 bg-gray-100 shadow-2xl drop-shadow-2xl drop-shadow- shadow-black z-20 px-8 py-5 ">
@@ -106,15 +105,15 @@ const Menu = ({
               className="w-36 h-28 rounded"
             />
           )}
-          {cartItem.filter((e) => e.id == foodInfo.id).length ? (
-            <div className="shadow-2xl w-20 py-1.5 bg-slate-700 dark:bg-slate-800  dark:text-slate-300 hover:dark:bg-slate-900 text-white rounded hover:bg-slate-900 flex cursor-pointer">
+          {cartItem.filter((e) => e.id === foodInfo.id).length ? (
+            <div className="bg-white border border-slate-300 text-green-700 font-semibold rounded-md w-20 h-9 flex justify-center items-center absolute bottom-0 dark:bg-green-700   dark:text-white dark:border-green-700 hover:dark:bg-white hover:dark:text-green-700 hover:bg-green-700 hover:text-white hover:border-green-700 cursor-pointer">
               <span
                 className="w-1/3  text-center"
                 onClick={(e) => handleRemoveItem(foodInfo.id)}>
                 -
               </span>
-              <span className="w-1/3  text-center text-green-200">
-                {cartItem.filter((e) => e.id == foodInfo.id).length}
+              <span className="w-1/3  text-center hover:cursor-default">
+                {cartItem.filter((e) => e.id === foodInfo.id).length}
               </span>
               <span
                 className="w-1/3  text-center "
@@ -124,10 +123,12 @@ const Menu = ({
             </div>
           ) : (
             <button
-              className="shadow-2xl w-20 py-1.5 bg-slate-700 dark:bg-slate-800  dark:text-slate-300 hover:dark:bg-slate-900 text-white rounded hover:bg-slate-900 "
+              data-testid="add-btn"
+              className="bg-white border border-slate-300 text-green-700 font-semibold rounded-md w-20 h-9 flex justify-center items-center absolute bottom-0 dark:bg-green-700   dark:text-white dark:border-green-700 hover:dark:bg-white hover:dark:text-green-700 hover:bg-green-700 hover:text-white hover:border-green-700"
               onClick={() => {
-                handleAddItem(foodInfo);
-                handleResInfo(resInfo);
+                resDet[0]?.id !== resInfo.id
+                  ? handleResInfo(resInfo)
+                  : handleAddItem(foodInfo);
               }}>
               Add
             </button>
@@ -151,13 +152,13 @@ const MenuList = ({
 }) => {
   const [show, setShow] = useState(true);
   const mode = useTheme();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(toggleCart(true))
   // }, []);
   // console.log(resInfo)
   return (
-    <div className="flex flex-col mb-6  bg-neutral-50 rounded-lg dark:bg-slate-700">
+    <div className="flex flex-col mb-6  rounded-lg bg-rose-50 dark:bg-slate-700">
       <h2
         onClick={(e) => setShow(!show)}
         className="font-semibold text-gray-600 dark:text-slate-200 text-2xl p-3 py-4 rounded relative cursor-pointer">

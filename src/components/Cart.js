@@ -15,7 +15,7 @@ import LocationIcon from "../assets/icons8-location-50.png";
 import HomeIcon from "../assets/icons8-home-50.png";
 import PaymentIcon from "../assets/icons8-wallet-50.png";
 
-const ListProduct = ({ name, price, id, isVeg }) => {
+const ListProduct = ({ name, price, id, isVeg, defaultPrice }) => {
   // const {
   //   item,
   //   count,
@@ -36,8 +36,8 @@ const ListProduct = ({ name, price, id, isVeg }) => {
   };
 
   return (
-    <div className=" py-4 flex  justify-between  mx-6 items-center dark:text-slate-300 border-b border-b-slate-300 dark:border-b-slate-500">
-      <span className="font-medium w-80  flex items-center text-slate-600">
+    <div className="  py-4 flex  justify-between  mx-6 items-center dark:text-slate-300 border-b border-b-slate-300 dark:border-b-slate-500">
+      <span className="font-medium w-80  flex items-center dark:text-slate-300 text-slate-600">
         {isVeg ? (
           <img src={Veg} alt="" className="w-5 h-5 my-1 mr-4" />
         ) : (
@@ -45,7 +45,7 @@ const ListProduct = ({ name, price, id, isVeg }) => {
         )}
         {name}
       </span>
-      <p className="flex  w-20  font-semibold justify-between  items-center border shadow-md dark:border-slate-500 rounded-md  dark:shadow-slate-700">
+      <p className="flex  w-20  font-semibold justify-between  items-center border shadow-md dark:border-slate-500 rounded-md  ">
         <span
           className=" px-3 py-0.5 text-xl cursor-pointer text-slate-400"
           onClick={(e) => {
@@ -62,7 +62,7 @@ const ListProduct = ({ name, price, id, isVeg }) => {
           -
         </span>
         <span className="text-green-600">
-          {cartItem.filter((e) => e.id == id).length}
+          {cartItem.filter((e) => e.id === id).length}
         </span>
         <span
           className="px-3 py-0.5 text-xl cursor-pointer text-green-600"
@@ -72,14 +72,17 @@ const ListProduct = ({ name, price, id, isVeg }) => {
             // setPurchasedItemPrice(
             //   purchasedItemPrice + parseInt((price / 100).toFixed(2))
             // );
-            handleAddItem(cartItem.filter((e) => e.id == id));
+            handleAddItem(cartItem.filter((e) => e.id === id));
           }}>
           +
         </span>
       </p>
       <span className="font-medium  w-32 text-center text-sm">
         ₹{" "}
-        {((price / 100) * cartItem.filter((e) => e.id == id).length).toFixed(2)}
+        {(
+          ((price || defaultPrice) / 100) *
+          cartItem.filter((e) => e.id === id).length
+        ).toFixed(2)}
       </span>
     </div>
   );
@@ -131,9 +134,9 @@ const Cart = () => {
   }, []);
   const theme = useTheme();
 
-  if (cartItem.length == 0) {
+  if (cartItem.length === 0) {
     return (
-      <div className="pt-28 px-28  dark:bg-slate-700 h-[102vh] text-center ">
+      <div className="pt-28 px-28  dark:bg-slate-700 h-[102vh] text-center bg-rose-100">
         <img src={emptyCart} alt="" className="mx-auto w-96 h-96 scale-110" />
         <p className="text-3xl font-semibold text-slate-500 dark:text-slate-300 my-2">
           Your cart is empty
@@ -141,8 +144,8 @@ const Cart = () => {
         <p className="text-lg text-slate-400">
           You can go to home page to view more restaurants
         </p>
-        <Link to="/Food-Villa/">
-          <button className="bg-red-200 dark:bg-slate-200 py-3 px-5 my-3 rounded-full shadow-lg font-bold text-slate-700">
+        <Link to="/Food-Villa">
+          <button className="bg-red-300 dark:bg-slate-200 py-3 px-5 my-3 rounded-full shadow-lg font-bold text-slate-700">
             Homepage
           </button>
         </Link>
@@ -150,12 +153,7 @@ const Cart = () => {
     );
   }
   return (
-    <div
-      className={
-        showLocationSec
-          ? "py-28  dark:bg-slate-800 flex justify-between "
-          : "py-28  dark:bg-slate-800 flex justify-between "
-      }>
+    <div className={"py-28 bg-rose-100  dark:bg-slate-800 flex justify-between "}>
       <div
         className={
           showLocationSec
@@ -165,12 +163,12 @@ const Cart = () => {
         <div
           className={
             showLocationSec
-              ? "h-screen w-2/5 bg-white absolute left-0 top-0 z-20 pt-28 px-10 transition-transform duration-700 opa"
-              : "h-screen w-2/5 bg-white absolute left-0 top-0 z-20 pt-32 px-10 transform -translate-x-full transition-transform duration-500"
+              ? "h-screen w-2/5 bg-rose-100 absolute left-0 top-0 z-20 pt-28 px-10 transition-transform duration-700 "
+              : "h-screen w-2/5 bg-rose-100 absolute left-0 top-0 z-20 pt-32 px-10 transform -translate-x-full transition-transform duration-500"
           }>
           <p className="font-semibold text-xl mb-10 text-slate-600">
             <span
-              className="p-2 px-3.5 border border-slate-300 rounded-full text-red-400 mr-2 cursor-pointer"
+              className="p-2 px-3.5 border border-orange-400 rounded-full text-red-400 mr-2 cursor-pointer"
               onClick={(e) => setShowLocationSec(false)}>
               x
             </span>{" "}
@@ -234,7 +232,7 @@ const Cart = () => {
             <div className="flex w-full bg-gray-50 mt-4">
               <p
                 className={
-                  selectPlace == "home"
+                  selectPlace === "home"
                     ? "w-1/3 border text-center py-4 text-base font-medium  cursor-pointer bg-black text-white"
                     : "w-1/3 border text-center py-4 text-base font-medium  cursor-pointer"
                 }
@@ -247,7 +245,7 @@ const Cart = () => {
               </p>
               <p
                 className={
-                  selectPlace == "work"
+                  selectPlace === "work"
                     ? "w-1/3 border text-center py-4 text-base font-medium  cursor-pointer bg-black text-white"
                     : "w-1/3 border text-center py-4 text-base font-medium  cursor-pointer"
                 }
@@ -259,7 +257,7 @@ const Cart = () => {
               </p>
               <p
                 className={
-                  selectPlace == "office"
+                  selectPlace === "office"
                     ? "w-1/3 border text-center py-4 text-base font-medium  cursor-pointer bg-black text-white"
                     : "w-1/3 border text-center py-4 text-base font-medium cursor-pointer"
                 }
@@ -277,7 +275,7 @@ const Cart = () => {
         </div>
       </div>
       <div className={showLocationSec ? "w-3/4 " : "w-3/4"}>
-        <div className="p-4 border mr-14 ml-20 pl-14 pb-6 relative ">
+        <div className=" bg-rose-50 dark:bg-slate-700 p-4 border mr-14 ml-20 pl-14 pb-6 relative ">
           <img
             src={Food}
             alt=""
@@ -287,7 +285,7 @@ const Cart = () => {
             }
           />
           <h1
-            className="text-xl rounded font-semibold bg-orange-400 py-2 px-4 text-white mb-5 cursor-pointer "
+            className="text-xl rounded font-semibold bg-orange-400  py-2 px-4 text-white mb-5 cursor-pointer "
             onClick={(e) =>
               setShow({ order: !show.order, location: false, payment: false })
             }>
@@ -317,7 +315,9 @@ const Cart = () => {
                   </p>
                 </div>
               </div>
-              <div className={"py-3 px-12  max-h-60 overflow-y-auto"}>
+              <div
+                className={"py-3 px-12  max-h-60 overflow-y-auto rounded-lg "}
+                data-testid="cart-item">
                 {Array.from(new Set(cartItem)).map((e, index) => (
                   <ListProduct key={index} {...e} />
                 ))}
@@ -360,7 +360,7 @@ const Cart = () => {
                 }}>
                 Add new address
               </button>
-              {Object.values(locationDet).filter((e) => e.length != 0).length !=
+              {Object.values(locationDet).filter((e) => e.length !== 0).length !==
                 0 && (
                 <div
                   className="w-80 border pl-14 py-5 mt-5 relative hover:shadow-xl cursor-pointer"
@@ -380,7 +380,7 @@ const Cart = () => {
                   <p className="py-2 text-slate-600 ">
                     {Object.values(locationDet)
                       .slice(0, Object.values(locationDet).length - 1)
-                      .filter((e) => e.length != 0)
+                      .filter((e) => e.length !== 0)
                       .join(", ")}
                   </p>
                 </div>
@@ -412,19 +412,23 @@ const Cart = () => {
             }>
             Choose payment method{" "}
           </h1>
-          {show.payment && <p className="w-full py-4 text-center bg-lime-700 text-white  font-semibold rounded mt-10 cursor-pointer">PROCEED TO PAY</p>}
+          {show.payment && (
+            <p className="w-full py-4 text-center bg-lime-700 text-white  font-semibold rounded mt-10 cursor-pointer">
+              PROCEED TO PAY
+            </p>
+          )}
         </div>
       </div>
       <div
         className={
           showLocationSec
-            ? "w-1/3 mr-10 border hover:shadow-2xl h-fit  px-16 pb-20 pt-5 rounded-lg dark:bg-slate-700 dark:shadow-lg dark:shadow-slate-950 opacity-100"
-            : "w-1/3 mr-10 border hover:shadow-2xl h-fit  px-16 pb-20 pt-5 rounded-lg dark:bg-slate-700 dark:shadow-lg dark:shadow-slate-950"
+            ? "bg-rose-50 w-1/3 mr-10 border hover:shadow-2xl h-fit  px-16 pb-20 pt-5 rounded-lg dark:bg-slate-700 dark:shadow-lg dark:shadow-slate-950 opacity-100"
+            : " bg-rose-50 w-1/3 mr-10 border hover:shadow-2xl h-fit  px-16 pb-20 pt-5 rounded-lg dark:bg-slate-700 dark:shadow-lg dark:shadow-slate-950"
         }>
         <p className="text-xl font-bold text-center pt-3 border-b w-fit mx-auto p-2 px-4 border-b-slate-700 dark:text-slate-200 dark:border-b-slate-200">
           Total Amount
         </p>
-        <p className="h-12 flex items-center justify-center  border-dashed border-slate-400 border mt-10 text-xl font-semibold text-slate-500 hover:shadow-md cursor-pointer dark:text-slate-400 dark:border-slate-500 dark:bg-slate-900">
+        <p className="h-12 flex items-center justify-center  border-dashed border-rose-300 border mt-10 text-xl font-medium text-slate-500 bg-rose-100 hover:shadow-md cursor-pointer dark:text-slate-300 dark:border-slate-500 dark:bg-slate-800">
           Apply Coupon
         </p>
         <p className="mt-10 font-medium text-lg dark:text-slate-200">
@@ -434,7 +438,10 @@ const Cart = () => {
           <div className="flex justify-between  py-3 text-slate-500 dark:text-slate-400">
             <p className="font-medium">Item Total</p>
             <p>
-              ₹ {cartItem.reduce((a, c) => a + c.price / 100, 0).toFixed(2)}
+              ₹{" "}
+              {cartItem
+                .reduce((a, c) => a + (c.price || c.defaultPrice) / 100, 0)
+                .toFixed(2)}
             </p>
           </div>
           <div className="flex justify-between  py-3 text-slate-500 dark:text-slate-400">
@@ -445,9 +452,12 @@ const Cart = () => {
             <p className="font-medium">GST & Restaurant Charges</p>
             <p>
               ₹{" "}
-              {(cartItem.reduce((a, c) => a + c.price / 100, 0) * 0.18).toFixed(
-                2
-              )}
+              {(
+                cartItem.reduce(
+                  (a, c) => a + (c.price || c.defaultPrice) / 100,
+                  0
+                ) * 0.18
+              ).toFixed(2)}
             </p>
           </div>
         </div>
@@ -456,9 +466,16 @@ const Cart = () => {
           <p className="font-semibold text-lg">
             ₹{" "}
             {(
-              cartItem.reduce((a, c) => a + c.price / 100, 0) +
+              cartItem.reduce(
+                (a, c) => a + (c.price || c.defaultPrice) / 100,
+                0
+              ) +
               40 +
-              cartItem.reduce((a, c) => a + c.price / 100, 0) * 0.18
+              cartItem.reduce(
+                (a, c) => a + (c.price || c.defaultPrice) / 100,
+                0
+              ) *
+                0.18
             ).toFixed(2)}
           </p>
         </div>
@@ -467,21 +484,3 @@ const Cart = () => {
   );
 };
 export default Cart;
-
-// const Cart = () => {
-//   const cartItem = useSelector((store) => store.cart.item);
-
-//   return (
-//     <div className="pt-28 px-28">
-//       {cartItem.map((e, index) => (
-//         <div key={index} className="text-slate-800 font-semibold text-xl my-3 flex border-b border-b-slate-300 w-2/4 justify-between py-3">
-//           <p>{e.name}</p> <p className="text-green-600">₹ {e.price / 100}</p>
-//         </div>
-//       ))}
-
-//       <p className="text-sky-600 text-xl font-semibold w-1/2 text-center pt-3">Total Amount - ₹ {cartItem.reduce((a,c) => a + c.price/100 , 0)}</p>
-//     </div>
-//   );
-// };
-
-// export default Cart;

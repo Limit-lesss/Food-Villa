@@ -1,16 +1,17 @@
+import React, { useEffect, useRef, useState } from "react";
 import useRestaurant from "../utils/useRestaurant";
-import { CAROUSEL_IMG_CDN_URL } from "../utils/constants";
 import arrow_left from "../assets/icons8-arrow-60-left.png";
 import arrow_right from "../assets/icons8-arrow-60-right.png";
 import arrow_left_disable from "../assets/icons8-arrow-60-left-disable.png";
 import arrow_right_disable from "../assets/icons8-arrow-60-right-disable.png";
-import { useRef, useState, useEffect } from "react";
+import { IMG_CDN_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 
-const Carousel = ({ carousel }) => {
+const FoodType = ({ foodType }) => {
   const [arrowDisable, setArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const elementRef = useRef(null);
+  // console.log(foodType);
   useEffect(() => {
     const handleElementScroll = () => {
       if (
@@ -35,11 +36,11 @@ const Carousel = ({ carousel }) => {
   }, []);
   function handleHorizantalScroll(element, speed, distance, step) {
     let scrollAmount = 0;
-    const sliderId = setInterval(() => {
+    const timer = setInterval(() => {
       element.scrollLeft += step;
       scrollAmount += Math.abs(step);
       if (scrollAmount >= distance) {
-        clearInterval(sliderId);
+        clearInterval(timer);
       }
       if (element.scrollLeft + element.clientWidth === element.clientWidth) {
         setArrowDisable(true);
@@ -54,22 +55,17 @@ const Carousel = ({ carousel }) => {
       }
     }, speed);
   }
-
   return (
-    <div
-      className="mt-10
-    ">
-      <div className="flex justify-between mr-5">
-        <p className="text-3xl font-bold dark:text-slate-200 text-slate-700">
-          Best offer for you
-        </p>
-        <div>
+    <div className="mt-14">
+      <div className="text-3xl font-bold dark:text-slate-200 text-slate-700 flex justify-between">
+        What's on your mind?
+        <div className="mr-5">
           <button
             disabled={arrowDisable}
             onClick={(e) =>
               handleHorizantalScroll(elementRef.current, 10, 480, -40)
             }
-            className=" p-1.5 rounded-full  bg-white  mx-2">
+            className=" p-1.5 rounded-full bg-white mx-2">
             <img
               src={arrowDisable ? arrow_left_disable : arrow_left}
               alt=""
@@ -91,24 +87,26 @@ const Carousel = ({ carousel }) => {
         </div>
       </div>
       <div
-        className="flex mt-3 overflow-x-scroll no-scrollbar w-full"
+        className="flex w-full overflow-x-scroll no-scrollbar mt-5"
         ref={elementRef}>
-        {carousel?.map((e) => (
+        {foodType?.map((e) => (
           <Link
             to={
-              "/Food-Villa/restaurantCollection/" +
-              e?.entityId.slice(e?.entityId?.indexOf("=") + 1)
+              "/Food-Villa/foodItemRestaurantCollection/" +
+              e?.entityId.slice(
+                e?.entityId?.indexOf("=") + 1,
+                e?.entityId?.indexOf("&") === -1
+                  ? e?.entityId
+                  : e?.entityId?.indexOf("&")
+              )
             }
             key={e?.id}>
-            <div className="w-96 mr-6">
+            <div className="w-48 mr-8">
               <img
-                src={CAROUSEL_IMG_CDN_URL + e?.imageId}
-                className=" w-96 h-60 border-none"
-                alt={e?.accessibility?.altText}
-                onError={(event) => {
-                  event.target.src = `${CAROUSEL_IMG_CDN_URL}rng/md/carousel/production/ea4857fd3ad8869418dfa14a92e7a4fd`;
-                  event.onerror = null;
-                }}
+                src={IMG_CDN_URL + e.imageId}
+                alt=""
+                className="rounded-lg w-[180px] h-52 border border-red-300"
+                key={e?.id}
               />
             </div>
           </Link>
@@ -117,4 +115,5 @@ const Carousel = ({ carousel }) => {
     </div>
   );
 };
-export default Carousel;
+
+export default FoodType;
