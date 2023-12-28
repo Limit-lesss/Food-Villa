@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Food-Villa/static/css/main.41a112d3.css",
-    "main.js": "/Food-Villa/static/js/main.8e3fa98e.js",
+    "main.css": "/Food-Villa/static/css/main.91a1e8bc.css",
+    "main.js": "/Food-Villa/static/js/main.c02c8b68.js",
     "static/js/842.803e4746.chunk.js": "/Food-Villa/static/js/842.803e4746.chunk.js",
     "static/js/787.9d96f578.chunk.js": "/Food-Villa/static/js/787.9d96f578.chunk.js",
     "static/media/no-internet.jpg": "/Food-Villa/static/media/no-internet.e8e89d003ad460452995.jpg",
@@ -13,13 +13,13 @@
     "static/media/non-veg.png": "/Food-Villa/static/media/non-veg.59017ffdbf8170778224.png",
     "static/media/veg.png": "/Food-Villa/static/media/veg.ae408ce37a4db6433229.png",
     "index.html": "/Food-Villa/index.html",
-    "main.41a112d3.css.map": "/Food-Villa/static/css/main.41a112d3.css.map",
-    "main.8e3fa98e.js.map": "/Food-Villa/static/js/main.8e3fa98e.js.map",
+    "main.91a1e8bc.css.map": "/Food-Villa/static/css/main.91a1e8bc.css.map",
+    "main.c02c8b68.js.map": "/Food-Villa/static/js/main.c02c8b68.js.map",
     "842.803e4746.chunk.js.map": "/Food-Villa/static/js/842.803e4746.chunk.js.map",
     "787.9d96f578.chunk.js.map": "/Food-Villa/static/js/787.9d96f578.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.41a112d3.css",
-    "static/js/main.8e3fa98e.js"
+    "static/css/main.91a1e8bc.css",
+    "static/js/main.c02c8b68.js"
   ]
 }
