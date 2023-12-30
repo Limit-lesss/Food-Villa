@@ -5,7 +5,7 @@ import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import NoInternet from "./NoInternet";
 import useRestaurant from "../utils/useRestaurant";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
 import CarouselShimmer from "./CarouselShimmer";
 import { updatedRestaurant } from "../utils/constants";
@@ -21,6 +21,7 @@ const Body = () => {
   // const online = useOnline();
   // const [showUpdatedRes, setShowUpdatedRes] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // useEffect(() => {
   //   dispatch(toggleCart(true));
   // }, []);
@@ -64,7 +65,7 @@ const Body = () => {
   ) : (
     <div className="px-28 pt-20 dark:bg-slate-800 min-h-screen bg-red-100">
       {/* <Carousel carousel={carousel} /> */}
-      <FoodType foodType={foodType}/>
+      <FoodType foodType={foodType} />
       <div className="py-3 pt-10 w-fit">
         <input
           data-testid="search-input"
@@ -88,9 +89,7 @@ const Body = () => {
         className="grid grid-cols-4 gap-4 py-5 min-h-screen"
         data-testid="restaurant">
         {filterData(restaurant, text)?.map((e) => (
-          <Link to={"/Food-Villa/restaurant/" + e?.info?.id} key={e?.info?.id}>
-            <RestaurantCard {...e?.info} />
-          </Link>
+          <RestaurantCard {...e?.info} key={e?.info?.id} />
         ))}
         {/* {resData?.map((e) => (
           <Link to={"/restaurant/" + e?.info?.id} key={e?.info?.id}>

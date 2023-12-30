@@ -11,8 +11,11 @@ const RestaurantCard = ({
   aggregatedDiscountInfoV3,
   sla,
 }) => {
+  const navigate = useNavigate();
   return (
-    <div className="w-[260px]  shadow-lg rounded-md mt-5 overflow-hidden flex flex-col justify-normal bg-pink-50 dark:bg-slate-700 hover:scale-95 hover:transition-all hover:duration-200 relative">
+    <div
+      className="w-[260px]  shadow-lg rounded-md mt-5 overflow-hidden flex flex-col justify-normal bg-pink-50 dark:bg-slate-700 hover:scale-95 hover:cursor-pointer hover:transition-all hover:duration-200 relative"
+      onClick={() => navigate("/Food-Villa/restaurant/" + id)}>
       <div className="relative">
         <img
           src={IMG_CDN_URL + cloudinaryImageId}
@@ -20,7 +23,7 @@ const RestaurantCard = ({
           className="h-44 w-full"
         />
         {aggregatedDiscountInfoV3?.header && (
-          <div className="p-2 rounded-md absolute top-2  bg-gradient-to-r from-orange-500 to-yellow-400   text-lg font-bold text-slate-800">
+          <div className="p-2 rounded-md absolute top-2  bg-gradient-to-r from-orange-400 to-yellow-300   text-lg font-bold text-slate-800">
             {aggregatedDiscountInfoV3?.subHeader &&
               aggregatedDiscountInfoV3?.header +
                 " " +

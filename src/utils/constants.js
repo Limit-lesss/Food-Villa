@@ -47,6 +47,12 @@ export const SEARCH_RES_LIST =
     "https://www.swiggy.com/dapi/restaurants/search/v3?lat=25.617614174660254&lng=85.10844469070436&trackingId=d8cf29b5-7f01-4147-9ef6-52676c59e7e3&submitAction=ENTER&queryUniqueId=591c7915-88e8-7e94-34b6-e8a3203304d4" +
       "&str="
   );
+export const SEARCH_RES_SEARCH_LIST =
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://www.swiggy.com/dapi/restaurants/search/v3?lat=25.617614174660254&lng=85.10844469070436&trackingId=undefined&submitAction=SUGGESTION&queryUniqueId=6183face-817d-b9a1-3878-b0cab666c56a&metaData=%7B%22type%22%3A%22RESTAURANT%22%2C%22data%22%3A%7B%22parentId%22%3A21809%2C%22primaryRestaurantId%22%3A373155%2C%22cloudinaryId%22%3A%22af33b81798b11deba338e94b7585d348%22%2C%22brandId%22%3A21809%2C%22dishFamilyId%22%3A%22846516%22%2C%22enabled_flag%22%3A1%7D%2C%22businessCategory%22%3A%22SWIGGY_FOOD%22%2C%22displayLabel%22%3A%22Restaurant%22%7D" +
+      "&str="
+  );
 
 export const restaurantList = [
   {

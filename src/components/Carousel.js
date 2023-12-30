@@ -5,12 +5,13 @@ import arrow_right from "../assets/icons8-arrow-60-right.png";
 import arrow_left_disable from "../assets/icons8-arrow-60-left-disable.png";
 import arrow_right_disable from "../assets/icons8-arrow-60-right-disable.png";
 import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Carousel = ({ carousel }) => {
   const [arrowDisable, setArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const elementRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const handleElementScroll = () => {
       if (
@@ -94,12 +95,13 @@ const Carousel = ({ carousel }) => {
         className="flex mt-3 overflow-x-scroll no-scrollbar w-full"
         ref={elementRef}>
         {carousel?.map((e) => (
-          <Link
-            to={
-              "/Food-Villa/restaurantCollection/" +
-              e?.entityId.slice(e?.entityId?.indexOf("=") + 1)
-            }
-            key={e?.id}>
+          <div
+            onClick={() =>
+              navigate(
+                "/Food-Villa/restaurantCollection/" +
+                  e?.entityId.slice(e?.entityId?.indexOf("=") + 1)
+              )
+            }>
             <div className="w-96 mr-6">
               <img
                 src={CAROUSEL_IMG_CDN_URL + e?.imageId}
@@ -111,7 +113,7 @@ const Carousel = ({ carousel }) => {
                 }}
               />
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

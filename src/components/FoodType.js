@@ -5,12 +5,13 @@ import arrow_right from "../assets/icons8-arrow-60-right.png";
 import arrow_left_disable from "../assets/icons8-arrow-60-left-disable.png";
 import arrow_right_disable from "../assets/icons8-arrow-60-right-disable.png";
 import { IMG_CDN_URL } from "../utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FoodType = ({ foodType }) => {
   const [arrowDisable, setArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const elementRef = useRef(null);
+  const navigate = useNavigate();
   // console.log(foodType);
   useEffect(() => {
     const handleElementScroll = () => {
@@ -90,26 +91,27 @@ const FoodType = ({ foodType }) => {
         className="flex w-full overflow-x-scroll no-scrollbar mt-5"
         ref={elementRef}>
         {foodType?.map((e) => (
-          <Link
-            to={
-              "/Food-Villa/foodItemRestaurantCollection/" +
-              e?.entityId.slice(
-                e?.entityId?.indexOf("=") + 1,
-                e?.entityId?.indexOf("&") === -1
-                  ? e?.entityId
-                  : e?.entityId?.indexOf("&")
-              )
-            }
-            key={e?.id}>
-            <div className="w-48 mr-8">
+          <div>
+            <div className="w-48 mr-14" key={e?.id}>
               <img
                 src={IMG_CDN_URL + e.imageId}
                 alt=""
-                className="rounded-lg w-[180px] h-52 border border-red-300"
+                className="rounded-lg w-48 h-52  border border-red-300 hover:cursor-pointer"
                 key={e?.id}
+                onClick={() =>
+                  navigate(
+                    "/Food-Villa/foodItemRestaurantCollection/" +
+                      e?.entityId.slice(
+                        e?.entityId?.indexOf("=") + 1,
+                        e?.entityId?.indexOf("&") === -1
+                          ? e?.entityId
+                          : e?.entityId?.indexOf("&")
+                      )
+                  )
+                }
               />
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

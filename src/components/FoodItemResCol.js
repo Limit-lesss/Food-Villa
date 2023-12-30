@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { FETCH_FOODTYPE_RES_COL, IMG_CDN_URL } from "../utils/constants";
 import Shimmer from "./ShimmerEffect";
@@ -7,6 +7,7 @@ import Shimmer from "./ShimmerEffect";
 const FoodItemResCol = () => {
   const [resColData, setResColData] = useState([]);
   const { entityId } = useParams();
+  const navigate = useNavigate();
   //   console.log(entityId);
   useEffect(() => {
     getResCol();
@@ -51,11 +52,13 @@ const FoodItemResCol = () => {
       }
       <div className="grid grid-cols-4 gap-10 ">
         {resColData?.slice(3)?.map((e) => (
-          <Link
-            to={"/Food-Villa/restaurant/" + e?.card?.card?.info?.id}
+          <div
+            onClick={() =>
+              navigate("/Food-Villa/restaurant/" + e?.card?.card?.info?.id)
+            }
             key={e?.card?.card?.info?.id}>
             <RestaurantCard {...e?.card?.card?.info} />
-          </Link>
+          </div>
         ))}
       </div>
     </div>
