@@ -21,9 +21,10 @@ const RestaurantCard = ({
         />
         {aggregatedDiscountInfoV3?.header && (
           <div className="p-2 rounded-md absolute top-2  bg-gradient-to-r from-orange-500 to-yellow-400   text-lg font-bold text-slate-800">
-            {aggregatedDiscountInfoV3?.header +
-              " " +
-              aggregatedDiscountInfoV3?.subHeader}
+            {aggregatedDiscountInfoV3?.subHeader &&
+              aggregatedDiscountInfoV3?.header +
+                " " +
+                aggregatedDiscountInfoV3?.subHeader}
           </div>
         )}
       </div>
