@@ -5,6 +5,7 @@ import {
   SEARCH_RESULT,
   SEARCH_RES_LIST,
   SEARCH_RES_SEARCH_LIST,
+  SEARCH_CUISINE,
 } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import Veg from "../assets/veg.png";
@@ -18,6 +19,7 @@ import {
   addResDetail,
 } from "../utils/cartSlice";
 import SearchedRestList from "./SearchedRestList";
+import { addSearchResult } from "../utils/searchSlice";
 
 const SearchPage = () => {
   const [preSearch, setPreSearch] = useState([]);
@@ -26,9 +28,12 @@ const SearchPage = () => {
   const [searchResList, setSearchResList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [show, setShow] = useState(true);
+  const [showMore, setShowMore] = useState(false);
   const cartItem = useSelector((store) => store.cart.item);
+  const searchHistory = useSelector((store) => store.searchHistory.history);
+
   const navigate = useNavigate();
-  // console.log(searchResList[0]?.card?.card?.info);
+  console.log(searchResList);
   // console.log(searchText);
   const dispatch = useDispatch();
   const handleAddItem = (foodInfo) => {
@@ -73,7 +78,7 @@ const SearchPage = () => {
   // useEffect(() => {
   //   getSearchRes();
   // }, [searchText]);
-  async function getSearchRes(text, searchValue) {
+  async function getSearchRes(text, searchValue, meta) {
     try {
       if (text === "Dish") {
         const response = await fetch(SEARCH_RES_LIST + searchValue);
@@ -83,7 +88,18 @@ const SearchPage = () => {
         );
       }
       if (text === "Restaurant") {
-        const response = await fetch(SEARCH_RES_SEARCH_LIST + searchValue);
+        const response = await fetch(
+          SEARCH_RES_SEARCH_LIST + text + "&metaData=" + meta
+        );
+        const data = await response.json();
+        setSearchResList(
+          data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
+        );
+      }
+      if (text === "Cuisine") {
+        const response = await fetch(
+          SEARCH_CUISINE + text + "&metaData=" + meta
+        );
         const data = await response.json();
         setSearchResList(
           data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
@@ -103,7 +119,7 @@ const SearchPage = () => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        {searchText.length === 0 ? (
+        {searchText?.length === 0 ? (
           <svg
             viewBox="5 -1 12 25"
             height="27"
@@ -128,7 +144,7 @@ const SearchPage = () => {
           </svg>
         )}
       </div>
-      {searchText.length !== 0 ? (
+      {searchText?.length !== 0 ? (
         <div className="mt-5 pt-5 ">
           {show &&
             searhData?.map((e, index) => (
@@ -137,7 +153,12 @@ const SearchPage = () => {
                 onClick={() => {
                   setShow(!show);
                   setSearchText(e?.text);
-                  getSearchRes(e?.subCategory, e?.text);
+                  getSearchRes(
+                    e?.subCategory,
+                    e?.text,
+                    e?.metadata?.replaceAll("\\", "-")
+                  );
+                  dispatch(addSearchResult(e?.text));
                 }}
                 key={index}>
                 <div className="">
@@ -246,7 +267,7 @@ const SearchPage = () => {
                   </div>
                 </div>
               ))}
-              {searchResList.length != 0 && (
+              {searchResList?.length !== 0 && (
                 <div className="col-span-2 w-2/4">
                   <div
                     onClick={() =>
@@ -265,7 +286,7 @@ const SearchPage = () => {
                   </div>
                 </div>
               )}
-              {searchResList.length != 0 && (
+              {searchResList?.length !== 0 && (
                 <div className="col-span-2 grid grid-cols-2 gap-6">
                   {searchResList[1]?.card?.card?.restaurants?.map((event) => (
                     <div
@@ -284,54 +305,114 @@ const SearchPage = () => {
         </div>
       ) : (
         <div className="mt-8 ml-5 ">
-          <div className="flex justify-between items-center">
-            <p className="text-lg font-medium text-slate-600 dark:text-white">
-              Recent Searches
-            </p>
-            <p className="text-xs font-medium text-orange-500">SHOW MORE</p>
-          </div>
-          <div className="my-2">
-            {Array(3)
-              .fill(0)
-              .map((e, index) => (
-                <div
-                  className="w-full pl-9 relative hover:cursor-pointer"
-                  key={index}>
-                  <svg
-                    viewBox="5 -1 12 25"
-                    height="20"
-                    width="20"
-                    // fill="#686b78"
-                    className=" absolute left-0 top-6 fill-green-700">
-                    <path d="M17.6671481,17.1391632 L22.7253317,22.1973467 L20.9226784,24 L15.7041226,18.7814442 C14.1158488,19.8024478 12.225761,20.3946935 10.1973467,20.3946935 C4.56550765,20.3946935 0,15.8291858 0,10.1973467 C0,4.56550765 4.56550765,0 10.1973467,0 C15.8291858,0 20.3946935,4.56550765 20.3946935,10.1973467 C20.3946935,12.8789625 19.3595949,15.3188181 17.6671481,17.1391632 Z M10.1973467,17.8453568 C14.4212261,17.8453568 17.8453568,14.4212261 17.8453568,10.1973467 C17.8453568,5.97346742 14.4212261,2.54933669 10.1973467,2.54933669 C5.97346742,2.54933669 2.54933669,5.97346742 2.54933669,10.1973467 C2.54933669,14.4212261 5.97346742,17.8453568 10.1973467,17.8453568 Z"></path>
-                  </svg>
-                  <div className="border-b border-b-slate-950 dark:border-b-slate-500 dark:text-white h-16 flex items-center text-slate-600 font-medium">
-                    Delights by INOX
+          {searchHistory.length !== 0 && (
+            <>
+              <div className="flex justify-between items-center">
+                <p className="text-lg font-medium text-slate-600 dark:text-white">
+                  Recent Searches
+                </p>
+                {searchHistory.length > 3 && (
+                  <p
+                    className="text-xs font-medium text-orange-500 hover:cursor-pointer"
+                    onClick={() => setShowMore(!showMore)}>
+                    SHOW MORE
+                  </p>
+                )}
+              </div>
+              <div className="my-2">
+                {searchHistory?.slice(0, 3)?.map((event, index) => (
+                  <div
+                    className="w-full pl-9 relative hover:cursor-pointer"
+                    key={index}
+                    onClick={() => {
+                      setSearchText(event);
+                      setSearchResList([]);
+                      setSearchResDishList([]);
+                      setShow(true);
+                    }}>
+                    <svg
+                      viewBox="5 -1 12 25"
+                      height="20"
+                      width="20"
+                      // fill="#686b78"
+                      className=" absolute left-0 top-6 fill-green-700">
+                      <path d="M17.6671481,17.1391632 L22.7253317,22.1973467 L20.9226784,24 L15.7041226,18.7814442 C14.1158488,19.8024478 12.225761,20.3946935 10.1973467,20.3946935 C4.56550765,20.3946935 0,15.8291858 0,10.1973467 C0,4.56550765 4.56550765,0 10.1973467,0 C15.8291858,0 20.3946935,4.56550765 20.3946935,10.1973467 C20.3946935,12.8789625 19.3595949,15.3188181 17.6671481,17.1391632 Z M10.1973467,17.8453568 C14.4212261,17.8453568 17.8453568,14.4212261 17.8453568,10.1973467 C17.8453568,5.97346742 14.4212261,2.54933669 10.1973467,2.54933669 C5.97346742,2.54933669 2.54933669,5.97346742 2.54933669,10.1973467 C2.54933669,14.4212261 5.97346742,17.8453568 10.1973467,17.8453568 Z"></path>
+                    </svg>
+                    <div className="border-b border-b-slate-950 dark:border-b-slate-500 dark:text-white h-16 flex items-center text-slate-600 font-medium">
+                      {event}
+                    </div>
                   </div>
-                </div>
-              ))}
-          </div>
+                ))}
+                {showMore &&
+                  searchHistory
+                    ?.filter(
+                      (value, index, array) => array.indexOf(value) === index
+                    )
+                    ?.slice(3)
+                    ?.map((event, index) => (
+                      <div
+                        className="w-full pl-9 relative hover:cursor-pointer"
+                        key={index}
+                        onClick={() => {
+                          setSearchText(event);
+                          setSearchResList([]);
+                          setSearchResDishList([]);
+                          setShow(true);
+                        }}>
+                        <svg
+                          viewBox="5 -1 12 25"
+                          height="20"
+                          width="20"
+                          // fill="#686b78"
+                          className=" absolute left-0 top-6 fill-green-700">
+                          <path d="M17.6671481,17.1391632 L22.7253317,22.1973467 L20.9226784,24 L15.7041226,18.7814442 C14.1158488,19.8024478 12.225761,20.3946935 10.1973467,20.3946935 C4.56550765,20.3946935 0,15.8291858 0,10.1973467 C0,4.56550765 4.56550765,0 10.1973467,0 C15.8291858,0 20.3946935,4.56550765 20.3946935,10.1973467 C20.3946935,12.8789625 19.3595949,15.3188181 17.6671481,17.1391632 Z M10.1973467,17.8453568 C14.4212261,17.8453568 17.8453568,14.4212261 17.8453568,10.1973467 C17.8453568,5.97346742 14.4212261,2.54933669 10.1973467,2.54933669 C5.97346742,2.54933669 2.54933669,5.97346742 2.54933669,10.1973467 C2.54933669,14.4212261 5.97346742,17.8453568 10.1973467,17.8453568 Z"></path>
+                        </svg>
+                        <div className="border-b border-b-slate-950 dark:border-b-slate-500 dark:text-white h-16 flex items-center text-slate-600 font-medium">
+                          {event}
+                        </div>
+                      </div>
+                    ))}
+              </div>
+            </>
+          )}
           <div className="mt-10">
             <p className="text-2xl font-bold text-slate-600 dark:text-white my-5">
               Popular Cuisines
             </p>
             <div className="w-full flex overflow-x-scroll no-scrollbar">
-              {preSearch[1]?.card?.card?.imageGridCards?.info?.map((e) => (
-                <div className="" key={e?.id}>
-                  <div className="w-24 border border-red-200 mr-5">
-                    <img
-                      src={IMG_CDN_URL + e?.imageId}
-                      alt=""
-                      className="h-32 w-24 hover:cursor-pointer"
-                      onClick={() =>
-                        setSearchText(
-                          e?.entityId.slice(e?.entityId.indexOf("=") + 1)
-                        )
-                      }
-                    />
+              {preSearch[1]?.card?.card?.imageGridCards?.info ? (
+                preSearch[1]?.card?.card?.imageGridCards?.info?.map((e) => (
+                  <div className="" key={e?.id}>
+                    <div className="w-24 border border-red-200 mr-5">
+                      <img
+                        src={IMG_CDN_URL + e?.imageId}
+                        alt=""
+                        className="h-32 w-24 hover:cursor-pointer"
+                        onClick={() => {
+                          setSearchText(
+                            decodeURIComponent(
+                              e?.entityId.slice(e?.entityId.indexOf("=") + 1)
+                            )
+                          );
+                          setSearchResList([]);
+                          setSearchResDishList([]);
+                          setShow(true);
+                        }}
+                      />
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="flex">
+                  {Array(9)
+                    .fill(0)
+                    .map((e, index) => (
+                      <div
+                        className="w-32 h-32 mr-5 bg-slate-200 animate-pulse border rounded-lg"
+                        key={index}></div>
+                    ))}
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>

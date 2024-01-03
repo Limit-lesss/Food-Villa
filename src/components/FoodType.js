@@ -91,12 +91,12 @@ const FoodType = ({ foodType }) => {
         className="flex w-full overflow-x-scroll no-scrollbar mt-5"
         ref={elementRef}>
         {foodType?.map((e) => (
-          <div>
-            <div className="w-48 mr-14" key={e?.id}>
+          <div key={e?.id}>
+            <div className="w-48 mr-14">
               <img
                 src={IMG_CDN_URL + e.imageId}
                 alt=""
-                className="rounded-lg w-48 h-52  border border-red-300 hover:cursor-pointer"
+                className="rounded-lg w-48 h-56  border border-red-300 hover:cursor-pointer"
                 key={e?.id}
                 onClick={() =>
                   navigate(

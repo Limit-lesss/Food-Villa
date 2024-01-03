@@ -5,6 +5,7 @@ const useRestaurantMenu = (id) => {
   const [restaurant, setRestaurant] = useState(null);
   // console.log(restaurant);
   const [menuList, setMenuList] = useState(null);
+  const [offerList, setOfferList] = useState(null);
   useEffect(() => {
     getRestaurant();
   }, []);
@@ -13,10 +14,13 @@ const useRestaurantMenu = (id) => {
     const data = await fetch(FETCH_MENU_URL + id);
     const json = await data.json();
     setRestaurant(json?.data?.cards[0]?.card?.card);
+    setOfferList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.offers
+    );
     setMenuList(json?.data?.cards[2]);
   }
 
-  return [restaurant, menuList];
+  return [restaurant, menuList, offerList];
 };
 
 export default useRestaurantMenu;

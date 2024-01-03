@@ -7,7 +7,7 @@ const FoodTypeShimmer = () => {
       {Array(6)
         .fill(0)
         .map((e, index) => (
-          <div className="w-48 h-48 bg-slate-300 animate-pulse rounded-lg" key={index}></div>
+          <div className="w-48 h-48 bg-slate-200 animate-pulse rounded-lg" key={index}></div>
         ))}
     </div>
     </div>

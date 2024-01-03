@@ -101,7 +101,8 @@ const Carousel = ({ carousel }) => {
                 "/Food-Villa/restaurantCollection/" +
                   e?.entityId.slice(e?.entityId?.indexOf("=") + 1)
               )
-            }>
+            }
+            key={e?.entityId}>
             <div className="w-96 mr-6">
               <img
                 src={CAROUSEL_IMG_CDN_URL + e?.imageId}
