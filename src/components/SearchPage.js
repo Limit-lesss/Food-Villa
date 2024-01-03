@@ -28,6 +28,7 @@ const SearchPage = () => {
   const [searchResList, setSearchResList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [show, setShow] = useState(true);
+  const [cuisineResult, setCuisineResult] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const cartItem = useSelector((store) => store.cart.item);
   const searchHistory = useSelector((store) => store.searchHistory.history);
@@ -86,6 +87,7 @@ const SearchPage = () => {
         setSearchResDishList(
           data?.data?.cards[1]?.groupedCard?.cardGroupMap?.DISH?.cards
         );
+        setCuisineResult(false);
       }
       if (text === "Restaurant") {
         const response = await fetch(
@@ -95,6 +97,7 @@ const SearchPage = () => {
         setSearchResList(
           data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
         );
+        setCuisineResult(false);
       }
       if (text === "Cuisine") {
         const response = await fetch(
@@ -104,6 +107,7 @@ const SearchPage = () => {
         setSearchResList(
           data?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards
         );
+        setCuisineResult(true);
       }
     } catch (error) {
       console.log(error);
@@ -111,7 +115,7 @@ const SearchPage = () => {
   }
   return (
     <div className="py-36 px-56 bg-rose-100 dark:bg-slate-800 min-h-screen">
-      <div className="relative border border-slate-400 rounded-lg">
+      <div className="relative border border-slate-400 rounded-lg ">
         <input
           type="text"
           className="h-14 w-full px-5 text-lg rounded-lg outline-none"
@@ -267,7 +271,7 @@ const SearchPage = () => {
                   </div>
                 </div>
               ))}
-              {searchResList?.length !== 0 && (
+              {searchResList?.length !== 0 && !cuisineResult && (
                 <div className="col-span-2 w-2/4">
                   <div
                     onClick={() =>
@@ -286,7 +290,7 @@ const SearchPage = () => {
                   </div>
                 </div>
               )}
-              {searchResList?.length !== 0 && (
+              {searchResList?.length !== 0 && !cuisineResult && (
                 <div className="col-span-2 grid grid-cols-2 gap-6">
                   {searchResList[1]?.card?.card?.restaurants?.map((event) => (
                     <div
@@ -300,18 +304,35 @@ const SearchPage = () => {
                   ))}
                 </div>
               )}
+              {searchResList?.length !== 0 && cuisineResult && (
+                <div className="col-span-2 grid grid-cols-2 gap-6">
+                  {searchResList?.map((event) => (
+                    <div
+                      onClick={() =>
+                        navigate(
+                          "/Food-Villa/restaurant/" +
+                            event?.card?.card?.info?.id
+                        )
+                      }
+                      key={event?.info?.id}
+                      className="hover:cursor-pointer">
+                      <SearchedRestList {...event?.card?.card} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
       ) : (
         <div className="mt-8 ml-5 ">
-          {searchHistory.length !== 0 && (
+          {searchHistory?.length !== 0 && (
             <>
               <div className="flex justify-between items-center">
                 <p className="text-lg font-medium text-slate-600 dark:text-white">
                   Recent Searches
                 </p>
-                {searchHistory.length > 3 && (
+                {searchHistory?.length > 3 && (
                   <p
                     className="text-xs font-medium text-orange-500 hover:cursor-pointer"
                     onClick={() => setShowMore(!showMore)}>
@@ -320,29 +341,34 @@ const SearchPage = () => {
                 )}
               </div>
               <div className="my-2">
-                {searchHistory?.slice(0, 3)?.map((event, index) => (
-                  <div
-                    className="w-full pl-9 relative hover:cursor-pointer"
-                    key={index}
-                    onClick={() => {
-                      setSearchText(event);
-                      setSearchResList([]);
-                      setSearchResDishList([]);
-                      setShow(true);
-                    }}>
-                    <svg
-                      viewBox="5 -1 12 25"
-                      height="20"
-                      width="20"
-                      // fill="#686b78"
-                      className=" absolute left-0 top-6 fill-green-700">
-                      <path d="M17.6671481,17.1391632 L22.7253317,22.1973467 L20.9226784,24 L15.7041226,18.7814442 C14.1158488,19.8024478 12.225761,20.3946935 10.1973467,20.3946935 C4.56550765,20.3946935 0,15.8291858 0,10.1973467 C0,4.56550765 4.56550765,0 10.1973467,0 C15.8291858,0 20.3946935,4.56550765 20.3946935,10.1973467 C20.3946935,12.8789625 19.3595949,15.3188181 17.6671481,17.1391632 Z M10.1973467,17.8453568 C14.4212261,17.8453568 17.8453568,14.4212261 17.8453568,10.1973467 C17.8453568,5.97346742 14.4212261,2.54933669 10.1973467,2.54933669 C5.97346742,2.54933669 2.54933669,5.97346742 2.54933669,10.1973467 C2.54933669,14.4212261 5.97346742,17.8453568 10.1973467,17.8453568 Z"></path>
-                    </svg>
-                    <div className="border-b border-b-slate-950 dark:border-b-slate-500 dark:text-white h-16 flex items-center text-slate-600 font-medium">
-                      {event}
+                {searchHistory
+                  ?.filter(
+                    (value, index, array) => array.indexOf(value) === index
+                  )
+                  ?.slice(0, 3)
+                  ?.map((event, index) => (
+                    <div
+                      className="w-full pl-9 relative hover:cursor-pointer"
+                      key={index}
+                      onClick={() => {
+                        setSearchText(event);
+                        setSearchResList([]);
+                        setSearchResDishList([]);
+                        setShow(true);
+                      }}>
+                      <svg
+                        viewBox="5 -1 12 25"
+                        height="20"
+                        width="20"
+                        // fill="#686b78"
+                        className=" absolute left-0 top-6 fill-green-700">
+                        <path d="M17.6671481,17.1391632 L22.7253317,22.1973467 L20.9226784,24 L15.7041226,18.7814442 C14.1158488,19.8024478 12.225761,20.3946935 10.1973467,20.3946935 C4.56550765,20.3946935 0,15.8291858 0,10.1973467 C0,4.56550765 4.56550765,0 10.1973467,0 C15.8291858,0 20.3946935,4.56550765 20.3946935,10.1973467 C20.3946935,12.8789625 19.3595949,15.3188181 17.6671481,17.1391632 Z M10.1973467,17.8453568 C14.4212261,17.8453568 17.8453568,14.4212261 17.8453568,10.1973467 C17.8453568,5.97346742 14.4212261,2.54933669 10.1973467,2.54933669 C5.97346742,2.54933669 2.54933669,5.97346742 2.54933669,10.1973467 C2.54933669,14.4212261 5.97346742,17.8453568 10.1973467,17.8453568 Z"></path>
+                      </svg>
+                      <div className="border-b border-b-slate-950 dark:border-b-slate-500 dark:text-white h-16 flex items-center text-slate-600 font-medium">
+                        {event}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
                 {showMore &&
                   searchHistory
                     ?.filter(
