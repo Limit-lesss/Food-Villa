@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Food-Villa/static/css/main.6665d5bd.css",
-    "main.js": "/Food-Villa/static/js/main.5049b538.js",
+    "main.js": "/Food-Villa/static/js/main.b54db596.js",
     "static/js/842.803e4746.chunk.js": "/Food-Villa/static/js/842.803e4746.chunk.js",
     "static/js/787.9d96f578.chunk.js": "/Food-Villa/static/js/787.9d96f578.chunk.js",
     "static/media/no-internet.jpg": "/Food-Villa/static/media/no-internet.e8e89d003ad460452995.jpg",
@@ -14,12 +14,12 @@
     "static/media/veg.png": "/Food-Villa/static/media/veg.ae408ce37a4db6433229.png",
     "index.html": "/Food-Villa/index.html",
     "main.6665d5bd.css.map": "/Food-Villa/static/css/main.6665d5bd.css.map",
-    "main.5049b538.js.map": "/Food-Villa/static/js/main.5049b538.js.map",
+    "main.b54db596.js.map": "/Food-Villa/static/js/main.b54db596.js.map",
     "842.803e4746.chunk.js.map": "/Food-Villa/static/js/842.803e4746.chunk.js.map",
     "787.9d96f578.chunk.js.map": "/Food-Villa/static/js/787.9d96f578.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6665d5bd.css",
-    "static/js/main.5049b538.js"
+    "static/js/main.b54db596.js"
   ]
 }
