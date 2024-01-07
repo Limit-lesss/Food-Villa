@@ -15,9 +15,9 @@ const useRestaurant = () => {
     const json = await data.json();
 
     setRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    setFoodType(json?.data?.cards[0]?.card?.card?.imageGridCards?.info);
+    setFoodType(json?.data?.cards[1]?.card?.card?.imageGridCards?.info);
     setCarousel(json?.data?.cards[0]?.card?.card?.imageGridCards?.info);
 
     // if (json.data?.cards[0]?.card?.card?.title === "Location Unserviceable") {

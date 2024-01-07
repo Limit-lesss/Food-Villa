@@ -103,7 +103,7 @@ const Carousel = ({ carousel }) => {
               )
             }
             key={e?.entityId}>
-            <div className="w-96 mr-6">
+            <div className="w-96 mr-6 cursor-pointer">
               <img
                 src={CAROUSEL_IMG_CDN_URL + e?.imageId}
                 className=" w-96 h-60 border-none"

@@ -58,13 +58,13 @@ const Body = () => {
   // }
   return restaurant?.length === 0 ? (
     <>
-      {/* <CarouselShimmer /> */}
+      <CarouselShimmer />
       <FoodTypeShimmer />
       <Shimmer show={true} />
     </>
   ) : (
     <div className="px-28 pt-20 dark:bg-slate-800 min-h-screen bg-red-100">
-      {/* <Carousel carousel={carousel} /> */}
+      <Carousel carousel={carousel} />
       <FoodType foodType={foodType} />
       <div className="py-3 pt-10 w-fit">
         <input
