@@ -26,7 +26,7 @@ const RestaurantCollection = () => {
   ) : (
     <div className="pt-28 px-20 pb-20 dark:bg-slate-800 bg-rose-100">
       {
-        <div className="text-5xl font-semibold pt-5 pb-6 text-slate-600">
+        <div className="text-5xl font-semibold pb-10 text-slate-600">
           {resColData[0]?.card?.card?.title}
         </div>
       }
@@ -37,7 +37,7 @@ const RestaurantCollection = () => {
               navigate("/Food-Villa/restaurant/" + e?.card?.card?.info?.id)
             }
             key={e?.card?.card?.info?.id}
-            className="hover:cursor-pointer">
+            className="hover:cursor-pointer w-fit">
             <RestaurantCard {...e?.card?.card?.info} />
           </div>
         ))}
