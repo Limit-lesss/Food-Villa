@@ -46,7 +46,8 @@ const FoodItemResCol = () => {
         </div>
       }
       {
-        <div className="text-slate-950 dark:text-white text-3xl font-semibold my-3">
+        <div className="text-slate-700 w-fit dark:text-white text-3xl font-semibold mb-10 mt-5
+        shadow-lg p-5 rounded-lg">
           {resColData[2]?.card?.card?.gridElements?.infoWithStyle?.text}
         </div>
       }

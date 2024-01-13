@@ -58,15 +58,15 @@ const Body = () => {
   // }
   return restaurant?.length === 0 ? (
     <>
-      <CarouselShimmer />
+      {carousel && <CarouselShimmer />}
       <FoodTypeShimmer />
       <Shimmer show={true} />
     </>
   ) : (
     <div className="px-28 pt-20 dark:bg-slate-800 min-h-screen bg-red-100">
-      <Carousel carousel={carousel} />
+      {carousel && <Carousel carousel={carousel} />}
       <FoodType foodType={foodType} />
-      <div className="py-3 pt-10 w-fit">
+      <div className="py-14 w-fit">
         <input
           data-testid="search-input"
           type="search"
@@ -86,7 +86,7 @@ const Body = () => {
       {/* //!  conditional rendering  */}
 
       <div
-        className="grid grid-cols-4 gap-4 py-5 min-h-screen"
+        className="grid grid-cols-4 gap-8 py-5 min-h-screen"
         data-testid="restaurant">
         {filterData(restaurant, text)?.map((e) => (
           <RestaurantCard {...e?.info} key={e?.info?.id} />

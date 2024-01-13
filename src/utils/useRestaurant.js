@@ -14,11 +14,20 @@ const useRestaurant = () => {
     const data = await fetch(FETCH_RESTAURANT_URL);
     const json = await data.json();
 
-    setRestaurant(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFoodType(json?.data?.cards[1]?.card?.card?.imageGridCards?.info);
-    setCarousel(json?.data?.cards[0]?.card?.card?.imageGridCards?.info);
+    if (json?.data?.cards[1]?.card?.card?.imageGridCards?.info) {
+      setRestaurant(
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+      setFoodType(json?.data?.cards[1]?.card?.card?.imageGridCards?.info);
+      setCarousel(json?.data?.cards[0]?.card?.card?.imageGridCards?.info);
+    } else{
+      setRestaurant(
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      );
+      setFoodType(json?.data?.cards[0]?.card?.card?.imageGridCards?.info);
+      setCarousel(false);
+    }
 
     // if (json.data?.cards[0]?.card?.card?.title === "Location Unserviceable") {
     //   setNoRestaurant(json.data?.cards[0]?.card?.card);

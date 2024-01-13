@@ -1,6 +1,6 @@
 import { useFormik, Field } from "formik";
 import { Link } from "react-router-dom";
-import Bg from "../assets/login-img.png";
+import Bg from "../assets/ordering-food.png";
 const SignInPage = () => {
   const formik = useFormik({
     initialValues: {
@@ -13,9 +13,9 @@ const SignInPage = () => {
     },
   });
   return (
-    <div className="flex justify-between p-20 pt-40 dark:bg-slate-800">
-      <div className="flex flex-col p-2 px-14 w-5/12 rounded-lg  shadow-2xl text-black dark:bg-slate-500">
-        <h2 className="text-center font-semibold text-2xl mt-4 text-pink-900 dark:text-gray-200">
+    <div className="flex justify-between p-20 pt-40 dark:bg-slate-800 bg-rose-100">
+      <div className="flex flex-col p-2 px-14 w-5/12 rounded-lg  shadow-2xl text-black dark:bg-slate-500 bg-rose-100">
+        <h2 className="text-center font-semibold text-2xl mt-4 text-slate-700 dark:text-gray-200">
           Food is ready for you...
         </h2>
         <form onSubmit={formik.handleSubmit} className="mt-6 ">
@@ -77,8 +77,8 @@ const SignInPage = () => {
           </button>
         </form>
       </div>
-      <div className="pt-4 scale-110">
-        <img src={Bg} className="" />
+      <div className="mr-20">
+        <img src={Bg} className="rounded-3xl pt-4 px-3 dark:bg-gradient-to-r dark:from-slate-300 dark:to-slate-500 bg-gradient-to-r from-rose-200/60 to-rose-300 shadow-2xl" />
       </div>
     </div>
   );

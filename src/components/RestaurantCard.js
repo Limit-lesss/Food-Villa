@@ -14,7 +14,7 @@ const RestaurantCard = ({
   const navigate = useNavigate();
   return (
     <div
-      className="w-[260px]  shadow-lg rounded-md  overflow-hidden flex flex-col justify-normal bg-pink-50 dark:bg-slate-700 hover:scale-95 hover:cursor-pointer hover:transition-all hover:duration-200 relative "
+      className="w-[260px]  shadow-lg rounded-md  overflow-hidden flex flex-col justify-normal bg-pink-50 dark:bg-slate-700 hover:scale-95 hover:cursor-pointer hover:transition-all hover:duration-200 relative mb-5"
       onClick={() => navigate("/Food-Villa/restaurant/" + id)}>
       <div className="relative">
         <img

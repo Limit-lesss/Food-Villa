@@ -8,7 +8,7 @@ import { IMG_CDN_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 
 const FoodType = ({ foodType }) => {
-  const [arrowDisable, setArrowDisable] = useState(true);
+  const [leftArrowDisable, setLeftArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const elementRef = useRef(null);
   const navigate = useNavigate();
@@ -19,14 +19,14 @@ const FoodType = ({ foodType }) => {
         elementRef.current.scrollLeft + elementRef.current.clientWidth ===
         elementRef.current.clientWidth
       ) {
-        setArrowDisable(true);
+        setLeftArrowDisable(true);
       } else if (
         elementRef.current.scrollLeft + elementRef.current.clientWidth ===
         elementRef.current.scrollWidth
       ) {
         setRightArrowDisable(true);
       } else {
-        setArrowDisable(false);
+        setLeftArrowDisable(false);
         setRightArrowDisable(false);
       }
     };
@@ -44,14 +44,14 @@ const FoodType = ({ foodType }) => {
         clearInterval(timer);
       }
       if (element.scrollLeft + element.clientWidth === element.clientWidth) {
-        setArrowDisable(true);
+        setLeftArrowDisable(true);
       } else if (
         element.scrollLeft + element.clientWidth ===
         element.scrollWidth
       ) {
         setRightArrowDisable(true);
       } else {
-        setArrowDisable(false);
+        setLeftArrowDisable(false);
         setRightArrowDisable(false);
       }
     }, speed);
@@ -62,13 +62,13 @@ const FoodType = ({ foodType }) => {
         What's on your mind?
         <div className="mr-5">
           <button
-            disabled={arrowDisable}
+            disabled={leftArrowDisable}
             onClick={(e) =>
               handleHorizantalScroll(elementRef.current, 10, 480, -40)
             }
             className=" p-1.5 rounded-full bg-white mx-2">
             <img
-              src={arrowDisable ? arrow_left_disable : arrow_left}
+              src={leftArrowDisable ? arrow_left_disable : arrow_left}
               alt=""
               className="w-6"
             />
