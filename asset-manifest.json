@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Food-Villa/static/css/main.f5865df4.css",
-    "main.js": "/Food-Villa/static/js/main.fe334374.js",
+    "main.css": "/Food-Villa/static/css/main.df257720.css",
+    "main.js": "/Food-Villa/static/js/main.4bc4c253.js",
     "static/js/842.803e4746.chunk.js": "/Food-Villa/static/js/842.803e4746.chunk.js",
     "static/js/787.9d96f578.chunk.js": "/Food-Villa/static/js/787.9d96f578.chunk.js",
+    "static/media/ordering-food.png": "/Food-Villa/static/media/ordering-food.d6f3695019dd71769b22.png",
     "static/media/no-internet.jpg": "/Food-Villa/static/media/no-internet.e8e89d003ad460452995.jpg",
     "static/media/emptyCart.png": "/Food-Villa/static/media/emptyCart.27635c780c7589568114.png",
-    "static/media/login-img.png": "/Food-Villa/static/media/login-img.1d3e3bed142be60b8588.png",
     "static/media/404.png": "/Food-Villa/static/media/404.ccbc392a3947a285cb7e.png",
     "static/media/light-foodvilla-logo.png": "/Food-Villa/static/media/light-foodvilla-logo.5b7946ae796d63ea8a76.png",
     "static/media/dark-foodvilla-logo.png": "/Food-Villa/static/media/dark-foodvilla-logo.23eb60d7acb8a69b7114.png",
     "static/media/non-veg.png": "/Food-Villa/static/media/non-veg.59017ffdbf8170778224.png",
     "static/media/veg.png": "/Food-Villa/static/media/veg.ae408ce37a4db6433229.png",
     "index.html": "/Food-Villa/index.html",
-    "main.f5865df4.css.map": "/Food-Villa/static/css/main.f5865df4.css.map",
-    "main.fe334374.js.map": "/Food-Villa/static/js/main.fe334374.js.map",
+    "main.df257720.css.map": "/Food-Villa/static/css/main.df257720.css.map",
+    "main.4bc4c253.js.map": "/Food-Villa/static/js/main.4bc4c253.js.map",
     "842.803e4746.chunk.js.map": "/Food-Villa/static/js/842.803e4746.chunk.js.map",
     "787.9d96f578.chunk.js.map": "/Food-Villa/static/js/787.9d96f578.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5865df4.css",
-    "static/js/main.fe334374.js"
+    "static/css/main.df257720.css",
+    "static/js/main.4bc4c253.js"
   ]
 }
