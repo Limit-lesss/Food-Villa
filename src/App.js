@@ -18,6 +18,7 @@ import Error from "./components/Error";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import SignInPage from "./components/SignInPage";
+import SignUpPage from "./components/SignUpPage";
 import Profile from "./components/ProfileClass";
 import Shimmer from "./components/ShimmerEffect";
 import useOnline from "./utils/useOnline";
@@ -94,7 +95,11 @@ export const appRouter = createBrowserRouter([
         element: <RestaurantMenu />,
       },
       {
-        path: "/Food-Villa/login",
+        path: "/Food-Villa/sign-up",
+        element: <SignUpPage />,
+      },
+      {
+        path: "/Food-Villa/sign-in",
         element: <SignInPage />,
       },
       {

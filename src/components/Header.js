@@ -13,6 +13,10 @@ import { IMG_CDN_URL } from "../utils/constants";
 import Veg from "../assets/veg.png";
 import NonVeg from "../assets/non-veg.png";
 import { toggleCart } from "../utils/cartSlice";
+import { toggleLogin } from "../utils/loginSlice";
+import axios from 'axios';
+
+
 const Title = () => {
   const { darkMode } = useTheme();
   return (
@@ -38,11 +42,18 @@ const Header = () => {
   // const { count } = useCart();
   const cartItems = useSelector((store) => store.cart.item);
   const resInfo = useSelector((store) => store.cart.resDetail);
+  const isLogin = useSelector((store) => store.auth.isLogin);
   const showCart = useSelector((store) => store.cart.showCart);
-  // const dispatch = useDispatch();
-  // const handleShowCart = () => {
-  //   // dispatch(toggleCart(false));
-  // };
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    dispatch(toggleLogin(false));
+    try {
+      await axios.get("http://localhost:5000/auth/logout");
+      console.log("Logout successful.");
+    } catch (error) {
+      console.error("Logout failed:", error.response.data.message);
+    }
+  };
   return (
     <div
       className="flex items-center justify-between bg-rose-100 dark:bg-slate-700 py-4 
@@ -143,7 +154,10 @@ const Header = () => {
                         />
                         <p className="text-sm font-medium w-52">
                           {e.name} x{" "}
-                          {cartItems.filter((event) => event.id === e.id).length}
+                          {
+                            cartItems.filter((event) => event.id === e.id)
+                              .length
+                          }
                         </p>
                       </div>
                       <p className="text-slate-400 text-sm">
@@ -199,17 +213,15 @@ const Header = () => {
       )}
 
       <div className="mr-10">
-        {isLoggedIn ? (
+        {isLogin ? (
           <button
-            onClick={() => setIsLoggedIn(!isLoggedIn)}
+            onClick={handleLogout}
             className="rounded-full text-slate-600 dark:text-slate-900 p-2 w-28 text-lg bg-pink-300 dark:bg-slate-400 font-semibold shadow-lg hover:dark:shadow-slate-500 hover:dark:shadow-lg">
             Logout
           </button>
         ) : (
-          <Link to={"/Food-Villa/login"}>
-            <button
-              onClick={() => setIsLoggedIn(!isLoggedIn)}
-              className="rounded-full text-slate-600 dark:text-slate-900 p-2 w-28 text-lg bg-pink-200 dark:bg-slate-400 font-semibold shadow-lg hover:dark:shadow-slate-500 hover:dark:shadow-lg">
+          <Link to={"/Food-Villa/sign-up"}>
+            <button className="rounded-full text-slate-600 dark:text-slate-900 p-2 w-28 text-lg bg-pink-200 dark:bg-slate-400 font-semibold shadow-lg hover:dark:shadow-slate-500 hover:dark:shadow-lg">
               Login
             </button>
           </Link>
