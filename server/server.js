@@ -18,9 +18,10 @@ app.use(
     methods: ["GET", "POST"],
   })
 );
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
 
 app.use(
   session({
@@ -37,9 +38,8 @@ app.use(
     }),
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
-
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use("/", require("./routes/index"));
 
