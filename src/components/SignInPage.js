@@ -23,9 +23,12 @@ const SignInPage = () => {
           email: value.email,
           password: value.password,
         });
-        if (data) {
+        if (data?.data) {
           dispatch(toggleLogin(true));
           navigate("/Food-Villa");
+        } else {
+          setMessage(false);
+          formik.resetForm();
         }
       } catch (error) {
         setMessage(false);

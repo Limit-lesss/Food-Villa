@@ -48,7 +48,7 @@ const Header = () => {
   const handleLogout = async () => {
     dispatch(toggleLogin(false));
     try {
-      await axios.get("http://localhost:5000/auth/logout");
+      await axios.get("http://localhost:5000/api/logout");
       console.log("Logout successful.");
     } catch (error) {
       console.error("Logout failed:", error.response.data.message);
