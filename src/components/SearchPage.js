@@ -153,7 +153,7 @@ const SearchPage = () => {
           {show &&
             searhData?.map((e, index) => (
               <div
-                className="w-full p-3 hover:bg-white rounded-lg cursor-pointer flex items-center"
+                className="w-full p-3 hover:bg-white dark:hover:bg-slate-700 rounded-lg cursor-pointer flex items-center"
                 onClick={() => {
                   setShow(!show);
                   setSearchText(e?.text);
@@ -169,14 +169,14 @@ const SearchPage = () => {
                   <img
                     src={IMG_CDN_URL + e?.cloudinaryId}
                     alt=""
-                    className="w-28 h-24 rounded-lg"
+                    className="w-36 h-28 rounded-lg"
                   />
                 </div>
-                <div className="mx-5">
-                  <p className="text-base font-medium text-slate-800 dark:text-white my-1">
+                <div className="mx-8">
+                  <p className="text-lg font-medium text-slate-800 dark:text-white my-1">
                     {e?.text}
                   </p>
-                  <p className="text-sm text-slate-600">{e?.subCategory}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">{e?.subCategory}</p>
                 </div>
               </div>
             ))}
@@ -184,13 +184,13 @@ const SearchPage = () => {
             <div className="grid grid-cols-2 gap-5 ">
               {searchResDishList?.slice(1)?.map((e) => (
                 <div
-                  className="w-full bg-rose-50 dark:bg-slate-50 rounded-2xl p-3"
+                  className="w-full bg-rose-50 dark:bg-slate-600 rounded-2xl p-3 py-5"
                   key={e?.card?.card?.info?.id}>
                   <div className="py-2 border-b">
-                    <p className="text-base font-medium text-slate-600">
+                    <p className="text-base font-medium text-slate-600 dark:text-slate-100">
                       By {e?.card?.card?.restaurant?.info?.name}
                     </p>
-                    <div className="flex items-center text-slate-600 text-sm">
+                    <div className="flex items-center text-slate-600 dark:text-slate-200 text-sm">
                       <p className=" my-1">
                         &#9733; {e?.card?.card?.restaurant?.info?.avgRating}
                       </p>
@@ -205,13 +205,13 @@ const SearchPage = () => {
                       ) : (
                         <img src={NonVeg} alt="" className="w-5 h-5" />
                       )}
-                      <p className="pt-1 font-medium text-slate-800 dark:text-white text-lg">
+                      <p className="pt-2 pb-1 font-medium text-slate-800 dark:text-white text-lg">
                         {e?.card?.card?.info?.name}
                       </p>
-                      <p className="text-base font-medium text-slate-800 dark:text-white">
-                        ₹{e?.card?.card?.info?.price / 100}
+                      <p className="text-base font-medium text-slate-800 dark:text-green-300">
+                        ₹{e?.card?.card?.info?.price /100 || e?.card?.card?.info?.defaultPrice / 100}
                       </p>
-                      <p className="mt-3 text-slate-500 text-sm">
+                      <p className="mt-3 text-slate-500 dark:text-slate-300 text-sm">
                         {e?.card?.card?.info?.description}
                       </p>
                     </div>
@@ -221,14 +221,14 @@ const SearchPage = () => {
                           <img
                             src={IMG_CDN_URL + e?.card?.card?.info?.imageId}
                             alt=""
-                            className="w-28 h-24 rounded-lg"
+                            className="w-32 h-28 rounded-lg"
                           />
                         )}
                       </div>
                       {cartItem.filter(
                         (event) => event.id === e?.card?.card?.info?.id
                       ).length ? (
-                        <div className="bg-white border border-slate-300 text-green-700 font-semibold rounded-md w-20 h-9 flex justify-center items-center absolute bottom-0 dark:bg-green-700   dark:text-white dark:border-green-700 hover:dark:bg-white hover:dark:text-green-700 hover:bg-green-700 hover:text-white hover:border-green-700 cursor-pointer">
+                        <div className="bg-white border border-slate-300 text-green-700 font-semibold rounded-md w-20 h-9 flex justify-center items-center absolute -bottom-2 dark:bg-green-700   dark:text-white dark:border-green-700 hover:dark:bg-white hover:dark:text-green-700 hover:bg-green-700 hover:text-white hover:border-green-700 cursor-pointer">
                           <span
                             className="w-1/3  text-center"
                             onClick={() =>
@@ -254,7 +254,7 @@ const SearchPage = () => {
                       ) : (
                         <button
                           data-testid="add-btn"
-                          className="bg-white border border-slate-300 text-green-700 font-semibold rounded-md w-20 h-9 flex justify-center items-center absolute bottom-0 dark:bg-green-700   dark:text-white dark:border-green-700 hover:dark:bg-white hover:dark:text-green-700 hover:bg-green-700 hover:text-white hover:border-green-700"
+                          className="bg-white border border-slate-300 text-green-700 font-semibold rounded-md w-20 h-9 flex justify-center items-center absolute -bottom-2 dark:bg-green-700   dark:text-white dark:border-green-700 hover:dark:bg-white hover:dark:text-green-700 hover:bg-green-700 hover:text-white hover:border-green-700"
                           onClick={() => {
                             resDet[0]?.id !==
                             e?.card?.card?.restaurant?.info?.id
@@ -405,15 +405,15 @@ const SearchPage = () => {
             <p className="text-2xl font-bold text-slate-600 dark:text-white my-5">
               Popular Cuisines
             </p>
-            <div className="w-full flex overflow-x-scroll no-scrollbar">
+            <div className="w-full flex overflow-x-scroll scrollbar py-4">
               {preSearch[1]?.card?.card?.imageGridCards?.info ? (
                 preSearch[1]?.card?.card?.imageGridCards?.info?.map((e) => (
                   <div className="" key={e?.id}>
-                    <div className="w-24 border border-red-200 mr-5">
+                    <div className="w-28 border border-red-200 mr-5">
                       <img
                         src={IMG_CDN_URL + e?.imageId}
                         alt=""
-                        className="h-32 w-24 hover:cursor-pointer"
+                        className="h-36 w-28 hover:cursor-pointer"
                         onClick={() => {
                           setSearchText(
                             decodeURIComponent(

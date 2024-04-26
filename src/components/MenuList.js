@@ -63,10 +63,10 @@ const Menu = ({
           <h3 className="mt-1 text-sky-700 dark:text-slate-200 text-lg font-medium">
             {name}
           </h3>
-          <p className="my-0 text-red-900 dark:text-slate-200 font-bold">
+          <p className="my-0 text-red-900 dark:text-green-400 font-bold">
             ₹{(price || defaultPrice) / 100}
           </p>
-          <p className="my-1 text-slate-500 line-clamp-2"> {description}</p>
+          <p className="my-1 text-slate-500 line-clamp-2 dark:text-slate-400"> {description}</p>
         </div>
         {/* {showAlert && (
           <div className="fixed w-1/2 transition-all duration-300 h-56 bottom-2 left-80 bg-gray-100 shadow-2xl drop-shadow-2xl drop-shadow- shadow-black z-20 px-8 py-5 ">
@@ -166,15 +166,15 @@ const MenuList = ({ itemCards, title, carousel, categories, resInfo }) => {
             />
           ))}
       </div>
-      <div className="flex w-full overflow-x-scroll no-scrollbar">
+      <div className={ carousel?.length ? "flex w-full overflow-x-scroll scrollbar" : "flex w-full overflow-x-scroll no-scrollbar"}>
         {isUp &&
           carousel?.length &&
           carousel?.map((e) => (
             <div key={e?.bannerId}>
-              <div className="px-3 w-[400px] mx-3 py-4 flex relative">
+              <div className="px-3 w-[400px] mx-3 py-4 flex relative ">
                 <img src={IMG_CDN_URL + e?.creativeId} alt="" />
                 <div className="absolute bottom-8 left-8 z-10 text-base font-semibold text-white bg-orange-900/90 p-2 px-4 rounded-lg ">
-                  ₹{e?.dish?.info?.price / 100}
+                  ₹{e?.dish?.info?.price || e?.dish?.info?.defaultPrice / 100}
                 </div>
                 <div className="absolute left-40 bottom-2 z-20">
                   {cartItem.filter((event) => event.id === e?.dish?.info?.id)

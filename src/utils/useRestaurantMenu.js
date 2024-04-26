@@ -13,11 +13,12 @@ const useRestaurantMenu = (id) => {
   async function getRestaurant() {
     const data = await fetch(FETCH_MENU_URL + id);
     const json = await data.json();
-    setRestaurant(json?.data?.cards[0]?.card?.card);
+    setRestaurant(json?.data?.cards[2]?.card?.card);
     setOfferList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.offers
+      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers
     );
-    setMenuList(json?.data?.cards[2]);
+    setMenuList(json?.data?.cards[4]);
+    // console.log(json?.data?.cards[2])
   }
 
   return [restaurant, menuList, offerList];

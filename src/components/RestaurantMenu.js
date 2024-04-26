@@ -9,6 +9,7 @@ import { filterMenuList } from "../utils/helper";
 const RestaurantMenu = () => {
   const { id } = useParams();
   const [restaurant, menuList, offerList] = useRestaurantMenu(id); //! custom hook
+  console.log(menuList)
   return !restaurant ? (
     <Shimmer />
   ) : (
@@ -17,7 +18,7 @@ const RestaurantMenu = () => {
         <div className="">
           <div className="flex pb-8 justify-between items-center border-b border-dashed border-slate-400 ">
             <div className="">
-              <h2 className="text-4xl font-semibold text-cyan-900 dark:text-slate-300">
+              <h2 className="text-6xl pb-2 font-semibold text-cyan-900 dark:text-slate-300">
                 {restaurant?.info?.name}
               </h2>
               <p className="my-1 text-base font-medium dark:text-slate-400 text-slate-500">
@@ -26,7 +27,7 @@ const RestaurantMenu = () => {
               <p className="mb-2 text-base font-medium dark:text-slate-400 text-slate-500">
                 {restaurant?.info?.areaName}
               </p>
-              <div className="border border-slate-400 rounded-lg w-28 px-2">
+              <div className="border border-slate-400 rounded-lg w-28 px-2 bg-rose-50 dark:bg-slate-200">
                 <div
                   className={
                     "font-semibold text-lg dark:text-green-700 flex items-center   text-green-700 justify-center py-2 border-b border-slate-400"
@@ -62,7 +63,7 @@ const RestaurantMenu = () => {
                   </svg>
                   {restaurant?.info?.avgRating}
                 </div>
-                <div className="flex justify-center py-2 text-sm text-slate-600 dark:text-slate-300">
+                <div className="flex justify-center py-2 text-sm text-slate-600 dark:text-slate-700">
                   {restaurant?.info?.totalRatingsString}
                 </div>
               </div>
@@ -71,7 +72,7 @@ const RestaurantMenu = () => {
               <img
                 src={IMG_CDN_URL + restaurant?.info?.cloudinaryImageId}
                 alt=""
-                className="w-56 h-40 rounded-md mt-5"
+                className="w-96 h-72 rounded-md mt-5"
               />
             </div>
           </div>
@@ -117,10 +118,10 @@ const RestaurantMenu = () => {
                 {restaurant?.info?.costForTwoMessage}
               </div>
             </div>
-            <div className="py-6 flex overflow-x-scroll no-scrollbar">
+            <div className="py-10 flex overflow-x-scroll scrollbar">
               {offerList?.map((e) => (
                 <div key={e?.info?.offerIds}>
-                  <div className="w-80 h-28 mr-5 rounded-lg border border-rose-300/50 flex py-2">
+                  <div className="w-80 h-28 mr-5 rounded-lg border border-rose-500 flex py-2 bg-rose-50 ">
                     {e?.info?.offerTag && (
                       <div className="w-10 flex items-center justify-center border-r border-slate-400">
                         <span className="-rotate-90 whitespace-nowrap text-sm font-semibold text-orange-500">
@@ -129,7 +130,7 @@ const RestaurantMenu = () => {
                       </div>
                     )}
                     <div className="flex flex-col  w-full items-center justify-center px-2">
-                      <p className=" my-1 text-base dark:text-slate-300 font-bold flex items-center">
+                      <p className=" my-1 text-base dark:text-slate-700 font-bold flex items-center">
                         <img
                           src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_28,h_28/Store_Assets/Icons/OfferIconCart"
                           alt=""

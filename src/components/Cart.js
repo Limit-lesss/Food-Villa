@@ -36,16 +36,16 @@ const ListProduct = ({ name, price, id, isVeg, defaultPrice }) => {
   };
 
   return (
-    <div className="  py-4 flex  justify-between  mx-6 items-center dark:text-slate-300 border-b border-b-slate-300 dark:border-b-slate-500">
-      <span className="font-medium w-80  flex items-center dark:text-slate-300 text-slate-600">
+    <div className="  py-2  flex  justify-between  mx-6 items-center dark:text-slate-300 border-b border-b-slate-300 dark:border-b-slate-500">
+      <span className="font-medium text-lg w-80  flex items-center dark:text-slate-200 text-slate-600">
         {isVeg ? (
-          <img src={Veg} alt="" className="w-5 h-5 my-1 mr-4" />
+          <img src={Veg} alt="" className="w-6 h-6 my-1 mr-4" />
         ) : (
-          <img src={NonVeg} alt="" className="w-4 h-4 my-1 mr-4" />
+          <img src={NonVeg} alt="" className="w-6 h-6 my-1 mr-4" />
         )}
         {name}
       </span>
-      <p className="flex  w-20  font-semibold justify-between  items-center border shadow-md dark:border-slate-500 rounded-md  ">
+      <p className="flex  w-20  font-semibold justify-between  items-center border shadow-md dark:border-slate-500 dark:bg-slate-700 rounded-md  ">
         <span
           className=" px-3 py-0.5 text-xl cursor-pointer text-slate-400"
           onClick={(e) => {
@@ -77,7 +77,7 @@ const ListProduct = ({ name, price, id, isVeg, defaultPrice }) => {
           +
         </span>
       </p>
-      <span className="font-medium  w-32 text-center text-sm">
+      <span className="font-medium  w-32 text-center dark:text-green-400  text-base">
         ₹{" "}
         {(
           ((price || defaultPrice) / 100) *
@@ -153,7 +153,7 @@ const Cart = () => {
     );
   }
   return (
-    <div className={"py-28 bg-rose-100  dark:bg-slate-800 flex justify-between "}>
+    <div className={"py-28 pt-36 bg-rose-100  dark:bg-slate-800 flex justify-between "}>
       <div
         className={
           showLocationSec
@@ -285,7 +285,7 @@ const Cart = () => {
             }
           />
           <h1
-            className="text-xl rounded font-semibold bg-orange-400  py-2 px-4 text-white mb-5 cursor-pointer "
+            className="text-xl rounded font-semibold bg-orange-400 dark:bg-slate-600  py-2 px-4 text-white mb-5 cursor-pointer "
             onClick={(e) =>
               setShow({ order: !show.order, location: false, payment: false })
             }>
@@ -293,20 +293,20 @@ const Cart = () => {
           </h1>
           {show.order && (
             <>
-              <div className="flex items-center relative pb-3 px-16">
+              <div className="flex items-center relative pb-7 px-16 pt-5">
                 <img
                   src={theme.darkMode ? DeleteIcon : DeleteIconLight}
                   alt=""
-                  className="absolute top-1  right-28 rounded-full p-2 bg-pink-200 dark:bg-slate-900 w-10 h-10 cursor-pointer shadow-lg 
+                  className="absolute top-6  right-28 rounded-full p-2 bg-pink-200 dark:bg-slate-800 w-10 h-10 cursor-pointer shadow-lg 
           shadow-slate-200 dark:shadow-slate-800"
                   onClick={(e) => handleClearCart()}
                 />
                 <img
                   src={IMG_CDN_URL + resDet[0]?.cloudinaryImageId}
                   alt="resImg"
-                  className="w-24 h-20 rounded"
+                  className="w-28 h-24 rounded"
                 />
-                <div className="px-10">
+                <div className="px-10 ">
                   <p className="font-semibold text-xl pb-1 dark:text-slate-300">
                     {resDet[0]?.name}
                   </p>
@@ -316,7 +316,7 @@ const Cart = () => {
                 </div>
               </div>
               <div
-                className={"py-3 px-12  max-h-60 overflow-y-auto rounded-lg "}
+                className={"py-3 px-12  max-h-60 overflow-y-auto rounded-lg dark:bg-slate-600"}
                 data-testid="cart-item">
                 {Array.from(new Set(cartItem)).map((e, index) => (
                   <ListProduct key={index} {...e} />
@@ -339,7 +339,7 @@ const Cart = () => {
             }
           />
           <h1
-            className="text-xl rounded font-semibold bg-orange-400 py-2 px-4 text-white cursor-pointer mb-5"
+            className="text-xl rounded font-semibold bg-orange-400 py-2 dark:bg-slate-600 px-4 text-white cursor-pointer mb-5"
             onClick={(e) =>
               setShow({
                 order: false,
@@ -402,7 +402,7 @@ const Cart = () => {
             }
           />
           <h1
-            className="text-xl rounded font-semibold bg-orange-400 py-2 px-4 text-white cursor-pointer mb-5"
+            className="text-xl rounded font-semibold bg-orange-400 dark:bg-slate-600 py-2 px-4 text-white cursor-pointer mb-5"
             onClick={(e) =>
               setShow({
                 order: false,

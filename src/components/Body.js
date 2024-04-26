@@ -63,30 +63,29 @@ const Body = () => {
       <Shimmer show={true} />
     </>
   ) : (
-    <div className="px-28 pt-20 dark:bg-slate-800 min-h-screen bg-red-100">
+    <div className="px-28 pt-20 sm:max-lg:pt-10 sm:max-lg:px-5  dark:bg-slate-800 min-h-screen bg-red-100 w-full">
       {carousel && <Carousel carousel={carousel} />}
       <FoodType foodType={foodType} />
-      <div className="py-14 w-fit">
+      <div className="py-14 sm:max-lg:py-2 w-fit sm:max-lg:flex sm:max-lg:flex-col">
         <input
           data-testid="search-input"
           type="search"
           placeholder="Search ...."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="bg-white dark:bg-slate-200 placeholder:text-slate-500 h-11 pr-5 pl-6 text-lg rounded-full w-[340px] placeholder:italic outline-none"
+          className="bg-white dark:bg-slate-200 placeholder:text-slate-500 h-11 sm:max-lg:h-10 pr-5 sm:max-lg:pr-0 sm:max-lg:pl-4 pl-6 text-lg rounded-full w-[340px] sm:max-lg:w-72 placeholder:italic outline-none"
         />
         <button
           onClick={() => handleSearch()}
           data-testid="search-btn"
-          className="rounded-full text-gray-700 dark:bg-slate-600 dark:text-slate-100 px-6 py-2.5
-          bg-sky-200 font-semibold ml-4">
+          className="rounded-full text-gray-700 dark:bg-slate-600 dark:text-slate-100 px-6 sm:max-lg:px-0 sm:max-lg:py-1.5 py-2.5 bg-sky-200 font-semibold ml-4 sm:max-lg:ml-0 sm:max-lg:mt-2 sm:max-lg:w-24">
           Search
         </button>
       </div>
       {/* //!  conditional rendering  */}
 
       <div
-        className="grid grid-cols-4 gap-8 py-5 min-h-screen"
+        className="grid grid-cols-4 gap-8 py-5  sm:max-lg:flex sm:max-lg:flex-col"
         data-testid="restaurant">
         {filterData(restaurant, text)?.map((e) => (
           <RestaurantCard {...e?.info} key={e?.info?.id} />
@@ -115,7 +114,7 @@ const Body = () => {
         {resData?.length ? (
           <></>
         ) : (
-          <h2 className="text-xl font-semibold dark:text-slate-200 -mt-3 ">
+          <h2 className="text-xl font-semibold dark:text-slate-200 -mt-3 sm:max-lg:hidden">
             No match found
           </h2>
         )}

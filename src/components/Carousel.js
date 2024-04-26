@@ -58,8 +58,7 @@ const Carousel = ({ carousel }) => {
 
   return (
     <div
-      className="mt-10
-    ">
+      className="mt-10 ">
       <div className="flex justify-between mr-5">
         <p className="text-3xl font-bold dark:text-slate-200 text-slate-700">
           Best offer for you

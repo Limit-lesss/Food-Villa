@@ -58,9 +58,9 @@ const FoodType = ({ foodType }) => {
   }
   return (
     <div className="mt-14">
-      <div className="text-3xl font-bold dark:text-slate-200 text-slate-700 flex justify-between">
+      <div className="text-3xl sm:max-lg:text-base font-bold dark:text-slate-200 text-slate-700 flex justify-between">
         What's on your mind?
-        <div className="mr-5">
+        <div className="mr-5 sm:max-lg:mr-1">
           <button
             disabled={leftArrowDisable}
             onClick={(e) =>
@@ -70,7 +70,7 @@ const FoodType = ({ foodType }) => {
             <img
               src={leftArrowDisable ? arrow_left_disable : arrow_left}
               alt=""
-              className="w-6"
+              className="w-6 sm:max-lg:w-4"
             />
           </button>
           <button
@@ -82,7 +82,7 @@ const FoodType = ({ foodType }) => {
             <img
               src={rightArrowDisable ? arrow_right_disable : arrow_right}
               alt=""
-              className="w-6"
+              className="w-6 sm:max-lg:w-4"
             />
           </button>
         </div>
@@ -92,11 +92,11 @@ const FoodType = ({ foodType }) => {
         ref={elementRef}>
         {foodType?.map((e) => (
           <div key={e?.id}>
-            <div className="w-48 mr-14">
+            <div className="w-48 sm:max-lg:w-20 mr-14 sm:max-lg:mr-2">
               <img
                 src={IMG_CDN_URL + e.imageId}
                 alt=""
-                className="rounded-lg w-48 h-56  border border-red-300 hover:cursor-pointer"
+                className=" rounded-lg sm:max-lg:w-20 sm:max-lg:h-28 w-48 h-56  border border-red-300 hover:cursor-pointer"
                 key={e?.id}
                 onClick={() =>
                   navigate(
